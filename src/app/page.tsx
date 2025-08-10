@@ -1,103 +1,287 @@
-import Image from "next/image";
+import Header from "@/components/header"
+import Footer from "@/components/footer"
+import Image from "next/image"
+import { ArrowRight, Award, GraduationCap, Quote, Search } from 'lucide-react'
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+      <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero */}
+      <section className="relative bg-[url('/hero-image.png')] bg-no-repeat bg-cover bg-center">
+        
+
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 md:pt-16 md:pb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-14 lg:mt-">
+            <div className="text-white">
+              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+                {"Connect."}
+                <br />
+                {"Learn. Grow."}
+              </h1>
+              <p className="mt-6 text-base md:text-lg lg:text-xl text-[#D9C7E8] max-w-xl">
+                {
+                  "Advance your skills through structured research and innovation courses curated by the Directorate of Research, Innovation and Development (DRID), University of Benin."
+                }
+              </p>
+              <div className="mt-8">
+                <a
+                  href="#register"
+                  className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors shadow-lg"
+                >
+                  {"REGISTER NOW"}
+                </a>
+              </div>
+            </div>
+
+            {/* Hero Illustration */}
+            <div className="relative">
+              <div className="relative hover:transform hover:rotate-3 rotate-0 hover:transition-transform duration-500">
+              <div className="absolute -inset-6" aria-hidden="true" />
+              <div className="relative rounded-[20px] p-1 md:p-2">
+                <Image
+                  src="/hero-illustration.png"
+                  width={820}
+                  height={620}
+                  alt="People collaborating at computers"
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+            </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* About the DRID Course */}
+      <section className="py-13 md:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"About the DRID Course"}</h2>
+            <p className="mt-4 text-gray-700 text-lg max-w-2xl">
+              {
+                "Get cutting-edge research and innovation training through our online, expert-led course tailored for students, researchers, and professionals."
+              }
+            </p>
+
+            <ul className="mt-8 space-y-5 text-base md:text-lg">
+              <li className="flex items-start gap-3">
+    <span><GraduationCap className="h-6 w-6 text-[#7E1A95]" /></span>
+    
+    <span className="text-[#1F1F1F]">{"Learn from experienced faculty"}</span>
+  </li>
+  <li className="flex items-start gap-3">
+    <span><Search className="h-6 w-6 text-[#7E1A95]" /></span>
+    <span className="text-[#1F1F1F]">{"Research-driven practical insights"}</span>
+  </li>
+  <li className="flex items-start gap-3">
+    <span><Award className="h-6 w-6 text-[#7E1A95]" /></span>
+    <span className="text-[#1F1F1F]">{"Award-winning curriculum"}</span>
+  </li>
+              <li className="flex items-start gap-3">
+                <span><Award className="h-6 w-6 text-[#7E1A95]" /></span>
+                <span className="text-[#1F1F1F]">{"Hands-on case studies and projects"}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-4 blur-4xl bg-gradient-to-br from-pink-50 to-purple-50" aria-hidden="true" />
+            <div className="relative hidden lg:block">
+              <Image
+                src="/about-illustration.png"
+                width={900}
+                height={450}
+                alt="Course illustration with books, cap and magnifier"
+                className="w-full h-auto bg-gradient-to-br from-pink-50 to-purple-50"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Course Modules Preview */}
+      <section className="py-16 md:py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"Course Modules Preview"}</h2>
+            <p className="mt-3 text-gray-700 text-lg">
+              {"Explore core topics covered in the DRID course"}
+            </p>
+          </div>
+
+          <div className="relative mt-10 lg:mt-12">
+            {/* Decorative docs illustration on the right */}
+            <div className="hidden md:block absolute -top-28 right-0">
+              <Image
+                src="/modules-illustration.png"
+                width={220}
+                height={160}
+                alt="Documents graphic"
+                className="w-[160px] lg:w-[200px] h-auto"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 z-10 relative">
+              <ModuleCard
+                number={1}
+                title="Week 1: Introduction to Research in the 21st Century"
+                desc="Orientation, course objectives, and relevance in the digital age."
+              />
+              <ModuleCard
+                number={2}
+                title="Week 2: Research Approaches"
+                desc="Explore qualitative, quantitative & mixed-method frameworks."
+              />
+              <ModuleCard
+                number={3}
+                title="Week 3: Literature Review & Knowledge Management"
+                desc="Master sourcing and organizing key academic materials."
+              />
+              <ModuleCard
+                number={4}
+                title="Week 4: AI & Digital Tools for Research"
+                desc="Boost research efficiency using AI tools and open-source platforms."
+              />
+            </div>
+
+            <div className="mt-10 flex justify-center">
+              <a
+                href="#curriculum"
+                className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
+              >
+                {"View Full Curriculum"}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What learners are saying */}
+      <section className="py-16 md:py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">
+            {"What learners are saying"}
+          </h2>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <TestimonialCard name="Royal O." />
+            <TestimonialCard name="Caleb U." />
+            <TestimonialCard name="Joseph O." />
+          </div>
+
+          <div className="mt-6 text-center">
+            <a
+              href="#more-testimonials"
+              className="inline-flex items-center text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+            >
+              {"See More"}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 md:py-20 lg:py-24">
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#7E1A95] text-white text-3xl font-bold">
+            {"?"}
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">
+            {"Got Questions About the Course?"}
+          </h2>
+          <p className="mt-3 text-gray-700 text-lg">
+            {
+              "We’ve answered your top questions on duration, requirements, certification and more."
+            }
+          </p>
+          <div className="mt-6">
+            <a
+              href="#faqs"
+              className="inline-flex items-center text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+            >
+              {"View FAQs"}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section id="register" className="py-16 md:py-20 lg:py-24">
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">
+            {"Ready to start learning with DRID?"}
+          </h2>
+          <p className="mt-3 text-gray-700 text-lg">
+            {
+              "Join a growing community of learners across Nigeria. Gain skills. Earn certificates. Grow your future."
+            }
+          </p>
+          <div className="mt-8 space-y-5">
+            <a
+              href="#"
+              className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-8 py-4 transition-colors shadow-lg"
+            >
+              {"REGISTER NOW"}
+            </a>
+
+            <div className="text-gray-600">
+              <p className="mb-3">{"Not sure yet?"}</p>
+              <a
+                href="#curriculum"
+                className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
+              >
+                {"View Full Curriculum"}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
-  );
+  )
+}
+
+function ModuleCard({
+  number,
+  title,
+  desc,
+}: {
+  number: number
+  title: string
+  desc: string
+}) {
+  return (
+    <div className="bg-white rounded-2xl p-6 md:p-7 shadow-sm ring-1 ring-black/5">
+      <div className="flex items-start gap-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#7E1A95] text-white font-bold">
+          {number}
+        </div>
+        <div className="flex-1">
+          <h3 className="text-lg md:text-xl font-extrabold text-[#1F1F1F]">{title}</h3>
+          <p className="mt-2 text-gray-700">{desc}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TestimonialCard({ name }: { name: string }) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-black/5">
+      <Quote className="h-6 w-6 text-[#7E1A95] mb-4" />
+      <p className="text-gray-700 leading-relaxed">
+        {"Lorem ipsum dolor sit amet consectetur. Faucibus lectus lacus nunc eget pretium ipsum cras interdum turpis."}
+      </p>
+      <p className="mt-6 font-semibold text-[#1F1F1F]">{"— "}{name}</p>
+    </div>
+  )
 }
