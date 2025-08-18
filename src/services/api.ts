@@ -1,4 +1,8 @@
-import axios, { AxiosInstance, AxiosError } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { getToken, saveTokens, removeTokens } from "./indexdb";
 
 // Configure base API settings
@@ -12,6 +16,7 @@ interface LoginResponse {
     email: string;
     first_name: string;
     last_name: string;
+    role?: "admin" | "student"; // Add role to response type
   };
 }
 
@@ -20,6 +25,7 @@ interface UserProfile {
   email: string;
   first_name: string;
   last_name: string;
+  role?: "admin" | "student"; // Add role to profile type
 }
 
 interface UserData {
@@ -30,6 +36,7 @@ interface UserData {
   email: string;
   is_verified: boolean;
   username: string;
+  role?: "admin" | "student"; // Add role to user data type
 }
 
 interface LoginCredentials {
@@ -73,6 +80,10 @@ interface ResendEmailData {
   email: string;
 }
 
+interface CustomRequestConfig extends InternalAxiosRequestConfig {
+  _retry: boolean;
+}
+
 // Create axios instance with default config
 const api: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -98,6 +109,7 @@ api.interceptors.request.use(
       "/auth/registration/verify-email/",
       "/auth/registration/resend-email/",
       "/auth/google/",
+      "/admin-login/", // Add admin login to skip list
     ];
 
     const skipAuth = authEndpoints.some((endpoint) =>
@@ -130,7 +142,7 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       originalRequest &&
-      !originalRequest._retry
+      !(originalRequest as CustomRequestConfig)._retry
     ) {
       // Skip refresh for auth endpoints
       const authEndpoints = [
@@ -141,6 +153,7 @@ api.interceptors.response.use(
         "/auth/registration/verify-email/",
         "/auth/registration/resend-email/",
         "/auth/google/",
+        "/admin-login/", // Add admin login to skip list
       ];
 
       const isAuthEndpoint = authEndpoints.some((endpoint) =>
@@ -152,7 +165,7 @@ api.interceptors.response.use(
       }
 
       // Mark this request as retried
-      originalRequest._retry = true;
+      (originalRequest as CustomRequestConfig)._retry = true;
 
       // If we're already refreshing, wait for the existing refresh
       if (isRefreshing && refreshPromise) {
@@ -257,9 +270,20 @@ export const authApi = {
     return response.data;
   },
 
-  // Login user
+  // Login user (regular login)
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
     const response = await api.post("/auth/login/", credentials);
+
+    if (response.data.access && response.data.refresh) {
+      await saveTokens(response.data.access, response.data.refresh);
+    }
+
+    return response.data;
+  },
+
+  // Admin login (NEW - separate endpoint)
+  adminLogin: async (credentials: LoginCredentials): Promise<LoginResponse> => {
+    const response = await api.post("/admin-login/", credentials);
 
     if (response.data.access && response.data.refresh) {
       await saveTokens(response.data.access, response.data.refresh);
@@ -355,17 +379,17 @@ export const authApi = {
   },
 };
 
-// User management endpoints
+// User management endpoints (FIXED PATH - using /account/users/ as per README)
 export const userApi = {
   // Get all users
   getUsers: async (): Promise<UserData[]> => {
-    const response = await api.get("/accounts/users/");
+    const response = await api.get("/account/users/");
     return response.data;
   },
 
   // Get user by ID
   getUser: async (id: number): Promise<UserData> => {
-    const response = await api.get(`/accounts/users/${id}/`);
+    const response = await api.get(`/account/users/${id}/`);
     return response.data;
   },
 
@@ -374,19 +398,19 @@ export const userApi = {
     id: number,
     data: Partial<UserData>
   ): Promise<UserData> => {
-    const response = await api.put(`/accounts/users/${id}/`, data);
+    const response = await api.put(`/account/users/${id}/`, data);
     return response.data;
   },
 
   // Update user by ID (partial update)
   patchUser: async (id: number, data: Partial<UserData>): Promise<UserData> => {
-    const response = await api.patch(`/accounts/users/${id}/`, data);
+    const response = await api.patch(`/account/users/${id}/`, data);
     return response.data;
   },
 
   // Delete user by ID
   deleteUser: async (id: number): Promise<void> => {
-    await api.delete(`/accounts/users/${id}/`);
+    await api.delete(`/account/users/${id}/`);
   },
 };
 

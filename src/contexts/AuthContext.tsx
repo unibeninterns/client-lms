@@ -78,15 +78,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           ...response,
           isAuthenticated: true,
-          // You can determine role based on user properties or add role field to backend
-          role: response.email.includes('admin') ? 'admin' : 'student', // Temporary logic
+          // Role should come from the backend response now
+          role: response.role || 'student', // Default to student if role not provided
         });
         return true;
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Token verification failed:", error);
 
         // Try refreshing the token
-        if (error.response?.status === 401) {
+        if ((error as { response?: { status: number } })?.response?.status === 401) {
           console.log("Attempting to refresh token after failed verification");
           const newToken = await refreshAccessToken();
 
@@ -97,7 +97,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               setUser({
                 ...response,
                 isAuthenticated: true,
-                role: response.email.includes('admin') ? 'admin' : 'student',
+                role: response.role || 'student',
               });
               return true;
             } catch (verifyError) {
@@ -114,10 +114,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
 
         setUser(null);
-        setError(error.message || "Authentication failed");
+        setError(error instanceof Error ? error.message : "Authentication failed");
         return false;
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Auth check failed:", error);
       setUser(null);
       setError("Authentication check failed");
@@ -136,27 +136,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await authApi.login({ email, password });
+      // Use the dedicated admin login endpoint
+      const data = await authApi.adminLogin({ email, password });
       
-      // Verify this is an admin user (you might want to add role info to the backend response)
-      if (data.user.email.includes('admin') || data.user.first_name.toLowerCase().includes('admin')) {
-        setUser({
-          ...data.user,
-          isAuthenticated: true,
-          role: "admin",
-        });
-        return true;
-      } else {
-        setError("Access denied. Admin privileges required.");
-        await removeTokens();
-        return false;
-      }
-    } catch (error: any) {
+      // The backend should validate admin role and return appropriate user data
+      setUser({
+        ...data.user,
+        isAuthenticated: true,
+        role: data.user.role || "admin", // Backend should set this
+      });
+      return true;
+    } catch (error: unknown) {
       console.error("Admin login failed:", error);
-      const errorMessage = error.response?.data?.detail || 
-                          error.response?.data?.message || 
-                          error.message || 
-                          "Login failed";
+      const errorMessage = (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.detail || 
+                          (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.message || 
+                          (error as Error).message || 
+                          "Admin login failed";
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -168,19 +163,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
+      // Use the regular login endpoint for students
       const data = await authApi.login({ email, password });
       setUser({
         ...data.user,
         isAuthenticated: true,
-        role: "student",
+        role: data.user.role || "student", // Backend should set this
       });
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Student login failed:", error);
-      const errorMessage = error.response?.data?.detail || 
-                          error.response?.data?.message || 
-                          error.message || 
-                          "Login failed";
+      const errorMessage = (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.detail || 
+                          (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.message || 
+                          (error as Error).message || 
+                          "Student login failed";
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -199,11 +195,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       await authApi.register(data);
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Registration failed:", error);
-      const errorMessage = error.response?.data?.detail || 
-                          error.response?.data?.message || 
-                          error.message || 
+      const errorMessage = (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.detail || 
+                          (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.message || 
+                          (error as Error).message || 
                           "Registration failed";
       setError(errorMessage);
       throw new Error(errorMessage);
@@ -218,9 +214,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log("Logging out...");
       await authApi.logout();
       console.log("Logout API call successful");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Logout API call failed:", error);
-      setError(error.message || "Logout failed");
+      setError((error instanceof Error ? error.message : "Logout failed"));
     } finally {
       console.log("Removing local tokens");
       await removeTokens();
