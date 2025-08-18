@@ -29,7 +29,7 @@ export default function Page() {
               </p>
               <div className="mt-8">
                 <a
-                  href="#register"
+                  href="auth/register"
                   className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors shadow-lg"
                 >
                   {"REGISTER NOW"}
@@ -151,7 +151,7 @@ export default function Page() {
 
             <div className="mt-10 flex justify-center">
               <a
-                href="#curriculum"
+                href="/about-course#curriculum"
                 className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
               >
                 {"View Full Curriculum"}
@@ -226,7 +226,7 @@ export default function Page() {
           </p>
           <div className="mt-8 space-y-5">
             <a
-              href="#"
+              href="auth/register"
               className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-8 py-4 transition-colors shadow-lg"
             >
               {"REGISTER NOW"}
@@ -235,7 +235,7 @@ export default function Page() {
             <div className="text-gray-600">
               <p className="mb-3">{"Not sure yet?"}</p>
               <a
-                href="#curriculum"
+                href="/about-course#curriculum"
                 className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
               >
                 {"View Full Curriculum"}
