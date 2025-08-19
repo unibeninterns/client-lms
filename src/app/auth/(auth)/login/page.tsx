@@ -1,16 +1,64 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, FormEvent, useEffect } from "react"
+import { useAuth } from "@/contexts/AuthContext"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react'
 import Image from "next/image"
 
 export default function Page() {
   const [showPass, setShowPass] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [rememberMe, setRememberMe] = useState(false)
+  const [formError, setFormError] = useState("")
+  const { studentLogin, isLoading, error, clearError } = useAuth()
+
+  // Clear form error when user starts typing
+  useEffect(() => {
+    if (email || password) {
+      setFormError('');
+    }
+  }, [email, password]);
+
+  // Clear auth error when component mounts or when user starts interacting
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setFormError("")
+    clearError() // Clear any existing auth errors
+    
+    // Basic validation
+    if (!email || !password) {
+      setFormError('Email and password are required')
+      return
+    }
+
+    if (!email.includes('@')) {
+      setFormError('Please enter a valid email address')
+      return
+    }
+    
+    try {
+      await studentLogin(email, password)
+      // Success handling is done in AuthContext (redirect to student dashboard)
+    } catch (err: unknown) {
+      console.error('Login submission error:', err)
+      setFormError((err as Error).message || 'Login failed. Please try again.')
+    }
+  }
+
+  // Don't clear fields on error - let user correct their input
+  const displayError = formError || error
 
   return (
     <div className="w-full">
@@ -20,7 +68,18 @@ export default function Page() {
           __html: `document.currentScript?.parentElement?.previousElementSibling?.querySelectorAll('a')[1]?.setAttribute('data-active','true');`,
         }}
       />
-      <form className="mt-6 space-y-5">
+
+      {/* Error Display */}
+      {displayError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl">
+          <div className="flex items-center">
+            <AlertCircle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
+            <p className="text-sm text-red-600">{displayError}</p>
+          </div>
+        </div>
+      )}
+
+      <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
         {/* Username or Email */}
         <div className="space-y-2">
           <Label htmlFor="login-identity" className="sr-only">
@@ -30,11 +89,14 @@ export default function Page() {
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               id="login-identity"
-              type="text"
+              type="email"
               placeholder="Username or Email"
               className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
-              defaultValue=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               aria-label="Username or Email"
+              required
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -51,14 +113,18 @@ export default function Page() {
               type={showPass ? "text" : "password"}
               placeholder="Password"
               className="h-12 pl-10 pr-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
-              defaultValue=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               aria-label="Password"
+              required
+              disabled={isLoading}
             />
             <button
               type="button"
               aria-label={showPass ? "Hide password" : "Show password"}
               onClick={() => setShowPass((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground disabled:opacity-50"
+              disabled={isLoading}
             >
               {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -68,10 +134,16 @@ export default function Page() {
         {/* Remember + Forgot */}
         <div className="flex items-center justify-between text-sm">
           <label className="flex items-center gap-2">
-            <Checkbox id="remember" className="mt-0.5 border-[#6d0d75] data-[state=checked]:bg-[#6d0d75]" defaultChecked />
+            <Checkbox 
+              id="remember" 
+              className="mt-0.5 border-[#6d0d75] data-[state=checked]:bg-[#6d0d75]" 
+              checked={rememberMe}
+              onCheckedChange={(checked) => setRememberMe(!!checked)}
+              disabled={isLoading}
+            />
             <span className="text-muted-foreground">Remember me</span>
           </label>
-          <Link href="suth/forgot-password" className="text-[#6d0d75] hover:underline">
+          <Link href="/auth/forgot-password" className="text-[#6d0d75] hover:underline">
             Forgot Password?
           </Link>
         </div>
@@ -79,9 +151,17 @@ export default function Page() {
         {/* Submit */}
         <Button
           type="submit"
-          className="w-full h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] text-white font-medium"
+          className="w-full h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] text-white font-medium disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
+          disabled={isLoading}
         >
-          Login
+          {isLoading ? (
+            <>
+              <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
+              Logging in...
+            </>
+          ) : (
+            'Login'
+          )}
         </Button>
 
         {/* OR divider */}
@@ -94,24 +174,25 @@ export default function Page() {
         {/* Google tile */}
         <button
           type="button"
-          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50"
+          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Continue with Google"
+          disabled={isLoading}
         >
-          <span >
+          <span>
             <Image
-                                          src="/google.png"
-                                          width={100}
-                                          height={48}
-                                          className="w-3 md:w-4"
-                                          alt="Google Logo"
-                                        />
+              src="/google.png"
+              width={100}
+              height={48}
+              className="w-3 md:w-4"
+              alt="Google Logo"
+            />
           </span>
         </button>
 
         {/* Footer switch */}
         <p className="text-sm text-center text-muted-foreground">
           Don&apos;t have an account?{" "}
-          <Link href="auth/register" className="text-[#6d0d75] hover:underline">
+          <Link href="/auth/register" className="text-[#6d0d75] hover:underline">
             Register
           </Link>
         </p>

@@ -5,253 +5,161 @@ import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { CalendarDays, Monitor, Video, ListChecks, BriefcaseBusiness, BadgeCheck, MessageSquare, CreditCard, Check, GraduationCap, Search, Presentation, Lightbulb, Briefcase, ChevronDown, ChevronRight, X, ChevronLeft } from 'lucide-react'
-import { motion, useReducedMotion, useInView } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import { motion, useInView } from "framer-motion"
 
 export default function AboutCoursePage() {
-  const shouldReduceMotion = useReducedMotion()
-  
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero section */}
+      {/* Hero - exact replica styling */}
       <section className="relative">
-  {/* Background photo */}
-  <div className="absolute inset-0">
-    <Image
-      src="/about-hero.jpg"
-      alt="Group learning together around a laptop"
-      fill
-      priority
-      className="object-cover object-center"
-    />
-    {/* Purple overlay */}
-    <div className="absolute inset-0 bg-gradient-to-br from-[#2B0D24]/70 to-[#2F1432]/70" />
-  </div>
+        {/* Background photo */}
+        <div className="absolute inset-0">
+          <Image
+            src="/about-hero.jpg"
+            alt="Group learning together around a laptop"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          {/* Purple overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#2B0D24]/70 to-[#2F1432]/70" />
+        </div>
 
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-    <motion.div 
-      className="max-w-3xl"
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
-    >
-      <motion.h1 
-        className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight"
-        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: shouldReduceMotion ? 0 : 1, ease: "easeOut", delay: shouldReduceMotion ? 0 : 0.2 }}
-      >
-        {"Welcome to the "}
-        <br />
-        {"DRID Course Platform"}
-      </motion.h1>
-      <motion.p 
-        className="mt-4 text-white/90 text-lg md:text-xl max-w-2xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
-      >
-        {
-          "A hub for dynamic research-driven training, designed to equip you with practical tools for tomorrow."
-        }
-      </motion.p>
-      <motion.div 
-        className="mt-8"
-        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
-      >
-      <motion.a
-          href="#curriculum"
-          className="inline-flex items-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
-          whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
-          whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
-          {"VIEW COURSE CURRICULUM"}
-        </motion.a>
-      </motion.div>
-    </motion.div>
-  </div>
-</section>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="max-w-3xl">
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+              {"Welcome to the "}
+              <br />
+              {"DRID Course Platform"}
+            </h1>
+            <p className="mt-4 text-white/90 text-lg md:text-xl max-w-2xl">
+              {
+                "A hub for dynamic research-driven training, designed to equip you with practical tools for tomorrow."
+              }
+            </p>
+            <div className="mt-8">
+              <Link
+                href="#curriculum"
+                className="inline-flex items-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
+              >
+                {"VIEW COURSE CURRICULUM"}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Learning Experience */}
       <div className="bg-gradient-to-br from-pink-50 to-purple-50">
-  <section className="py-14 md:py-20 lg:py-24">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid md:grid-cols-2 gap-10 items-stretch">
-        <motion.div 
-          className="flex flex-col justify-center"
-          initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">
-            The DRID Learning Experience
-          </h2>
-          <motion.p 
-            className="mt-4 text-gray-800 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
-            viewport={{ once: true }}
-          >
-            {
-              "The Professional Diploma in Research Technologies and Innovation is offered by the Directorate of Research, Innovation, and Development (DRID) at the University of Benin."
-            }
-          </motion.p>
-          <motion.p 
-            className="mt-3 text-gray-800 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.3 }}
-            viewport={{ once: true }}
-          >
-            {
-              "This 12-week fully online, self-paced program is designed to empower researchers, postgraduate students, lecturers, and innovation professionals with modern research tools, AI-based methods, academic writing skills, data analysis strategies, grant writing expertise, and personal branding techniques."
-            }
-          </motion.p>
-          <motion.p 
-            className="mt-3 text-gray-800 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
-            viewport={{ once: true }}
-          >
-            {
-              "With expert-led live sessions, practical assignments, and a final portfolio project, learners build core research competencies for career and academic growth in today's knowledge economy."
-            }
-          </motion.p>
-        </motion.div>
-        <motion.div 
-          className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-black/5 min-h-[300px] lg:min-h-[500px] hidden md:block"
-          initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-          viewport={{ once: true, margin: "-100px" }}
-          whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-        >
-          <Image
-            src="/about-student.jpg"
-            fill
-            alt="Student taking notes while studying"
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </motion.div>
-      </div>
-    </div>
-  </section>
+      <section className="py-14 md:py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-10 items-stretch">
+            <div className="flex flex-col justify-center">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">
+                The DRID Learning Experience
+              </h2>
+              <p className="mt-4 text-gray-800 leading-relaxed">
+                {
+                  "The Professional Diploma in Research Technologies and Innovation is offered by the Directorate of Research, Innovation, and Development (DRID) at the University of Benin."
+                }
+              </p>
+              <p className="mt-3 text-gray-800 leading-relaxed">
+                {
+                  "This 12-week fully online, self-paced program is designed to empower researchers, postgraduate students, lecturers, and innovation professionals with modern research tools, AI-based methods, academic writing skills, data analysis strategies, grant writing expertise, and personal branding techniques."
+                }
+              </p>
+              <p className="mt-3 text-gray-800 leading-relaxed">
+                {
+                  "With expert-led live sessions, practical assignments, and a final portfolio project, learners build core research competencies for career and academic growth in today’s knowledge economy."
+                }
+              </p>
+            </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-black/5 min-h-[300px] lg:min-h-[500px] hidden md:block">
+                <Image
+                  src="/about-student.jpg"
+                  fill
+                  alt="Student taking notes while studying"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+          </div>
+          </div>
+          </section>
 
           {/* Nutshell feature cards (8) */}
           <section className="pt-1 md:pt-2 lg:pt-2 pb-14 md:pb-20 lg:pb-24">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.h3 
-      className="mt-10 md:mt-12 text-2xl md:text-3xl font-extrabold text-center text-[#1F1F1F]"
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-      viewport={{ once: true, margin: "-100px" }}
-    >
-      The DRID Diploma in a Nutshell
-    </motion.h3>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="mt-10 md:mt-12 text-2xl md:text-3xl font-extrabold text-center text-[#1F1F1F]">
+            The DRID Diploma in a Nutshell
+          </h3>
 
-    <motion.div 
-      className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      initial="initial"
-      whileInView="whileInView"
-      viewport={{ once: true, margin: "-50px" }}
-      variants={{
-        whileInView: {
-          transition: {
-            staggerChildren: shouldReduceMotion ? 0 : 0.1
-          }
-        }
-      }}
-    >
-      <AnimatedFeatureCard
-        icon={<CalendarDays className="h-7 w-7 text-[#7E1A95]" />}
-        title="Duration"
-        desc="12 weeks"
-      />
-      <AnimatedFeatureCard
-        icon={<Monitor className="h-7 w-7 text-[#7E1A95]" />}
-        title="Format"
-        desc="Fully online & self-paced"
-      />
-      <AnimatedFeatureCard
-        icon={<Video className="h-7 w-7 text-[#7E1A95]" />}
-        title="Live Sessions"
-        desc="2 weekly expert-led live sessions"
-      />
-      <AnimatedFeatureCard
-        icon={<ListChecks className="h-7 w-7 text-[#7E1A95]" />}
-        title="Assessment"
-        desc="Continuous quizzes + final project & exam"
-      />
-      <AnimatedFeatureCard
-        icon={<BriefcaseBusiness className="h-7 w-7 text-[#7E1A95]" />}
-        title="Capstone Project"
-        desc="Build and present a practical research portfolio"
-      />
-      <AnimatedFeatureCard
-        icon={<BadgeCheck className="h-7 w-7 text-[#7E1A95]" />}
-        title="Certification"
-        desc="Digital diploma (with optional transcript)"
-      />
-      <AnimatedFeatureCard
-        icon={<MessageSquare className="h-7 w-7 text-[#7E1A95]" />}
-        title="Support"
-        desc="Personalized expert feedback available"
-      />
-      <AnimatedFeatureCard
-        icon={<CreditCard className="h-7 w-7 text-[#7E1A95]" />}
-        title="Fee"
-        desc="₦50,000+ (see full pricing for breakdown)"
-      />
-    </motion.div>
-  </div>
-</section>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <FeatureCard
+              icon={<CalendarDays className="h-7 w-7 text-[#7E1A95]" />}
+              title="Duration"
+              desc="12 weeks"
+            />
+            <FeatureCard
+              icon={<Monitor className="h-7 w-7 text-[#7E1A95]" />}
+              title="Format"
+              desc="Fully online & self-paced"
+            />
+            <FeatureCard
+              icon={<Video className="h-7 w-7 text-[#7E1A95]" />}
+              title="Live Sessions"
+              desc="2 weekly expert-led live sessions"
+            />
+            <FeatureCard
+              icon={<ListChecks className="h-7 w-7 text-[#7E1A95]" />}
+              title="Assessment"
+              desc="Continuous quizzes + final project & exam"
+            />
+            <FeatureCard
+              icon={<BriefcaseBusiness className="h-7 w-7 text-[#7E1A95]" />}
+              title="Capstone Project"
+              desc="Build and present a practical research portfolio"
+            />
+            <FeatureCard
+              icon={<BadgeCheck className="h-7 w-7 text-[#7E1A95]" />}
+              title="Certification"
+              desc="Digital diploma (with optional transcript)"
+            />
+            <FeatureCard
+              icon={<MessageSquare className="h-7 w-7 text-[#7E1A95]" />}
+              title="Support"
+              desc="Personalized expert feedback available"
+            />
+            <FeatureCard
+              icon={<CreditCard className="h-7 w-7 text-[#7E1A95]" />}
+              title="Fee"
+              desc="₦50,000+ (see full pricing for breakdown)"
+            />
+          </div>
+        </div>
+      </section>
       </div>
 
       {/* Curriculum Snapshot */}
       <section id="curriculum" className="bg-white py-16 md:py-20 lg:py-24">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div 
-      className="text-center"
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-      viewport={{ once: true, margin: "-100px" }}
-    >
-      <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Curriculum Snapshot</h2>
-      <p className="mt-2 text-gray-700">
-        Explore the full learning journey—from foundational concepts to your final project.
-      </p>
-    </motion.div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Curriculum Snapshot</h2>
+            <p className="mt-2 text-gray-700">
+              Explore the full learning journey—from foundational concepts to your final project.
+            </p>
+          </div>
 
-    <motion.div 
-      className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5"
-      initial="initial"
-      whileInView="whileInView"
-      viewport={{ once: true, margin: "-50px" }}
-      variants={{
-        whileInView: {
-          transition: {
-            staggerChildren: shouldReduceMotion ? 0 : 0.05
-          }
-        }
-      }}
-    >
-      {weeks.map((w) => (
-        <AnimatedModuleRow key={w.number} number={w.number} title={w.title} desc={w.desc} />
-      ))}
-    </motion.div>
-  </div>
-</section>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+            {weeks.map((w) => (
+              <ModuleRow key={w.number} number={w.number} title={w.title} desc={w.desc} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* What you'll gain & Who should enroll */}
       <section className="bg-white py-8 md:py-10 lg:py-12">
@@ -334,22 +242,14 @@ export default function AboutCoursePage() {
         <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Ready to take the next step?</h2>
           <p className="mt-3 text-gray-700 text-lg">Join other research professionals building the future.</p>
-          <motion.div 
-        className="mt-8"
-        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
-      >
-      <motion.a
-          href="/auth/register"
-          className="inline-flex items-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
-          whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
-          whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
-          {"REGISTER NOW"}
-        </motion.a>
-      </motion.div>
+          <div className="mt-8">
+            <Link
+              href="/auth/register"
+              className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-8 py-4 transition-colors shadow-lg"
+            >
+              REGISTER NOW
+            </Link>
+          </div>
         </div>
       </section>
       </div>
@@ -359,7 +259,7 @@ export default function AboutCoursePage() {
   )
 }
 
-function AnimatedFeatureCard({
+function FeatureCard({
   icon,
   title,
   desc,
@@ -368,36 +268,22 @@ function AnimatedFeatureCard({
   title: string
   desc: string
 }) {
-  const shouldReduceMotion = useReducedMotion()
-  
   return (
-    <motion.div 
-      className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#7E1A95]/20 transition-transform hover:scale-[1.02]"
-      variants={{
-        initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-        whileInView: { opacity: 1, y: 0 }
-      }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
-      whileHover={shouldReduceMotion ? {} : { scale: 1.03, y: -5 }}
-    >
+    <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#7E1A95]/20 transition-transform hover:scale-[1.02]">
       <div className="flex items-start gap-5">
-        <motion.div 
-          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7E1A95]/10"
-          whileHover={shouldReduceMotion ? {} : { scale: 1.1, rotate: 5 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7E1A95]/10">
           {icon}
-        </motion.div>
+        </div>
         <div className="flex-1">
           <h4 className="text-lg font-extrabold text-[#1F1F1F]">{title}</h4>
           <p className="mt-1 text-gray-700">{desc}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
-function AnimatedModuleRow({
+function ModuleRow({
   number,
   title,
   desc,
@@ -406,32 +292,18 @@ function AnimatedModuleRow({
   title: string
   desc: string
 }) {
-  const shouldReduceMotion = useReducedMotion()
-  
   return (
-    <motion.div 
-      className="rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 p-5 shadow-sm ring-1 ring-black/5 transition-transform hover:scale-[1.02]"
-      variants={{
-        initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-        whileInView: { opacity: 1, y: 0 }
-      }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
-      whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -3 }}
-    >
+    <div className="rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 p-5 shadow-sm ring-1 ring-black/5 transition-transform hover:scale-[1.02]">
       <div className="flex items-start gap-4">
-        <motion.div 
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#7E1A95] text-white font-bold"
-          whileHover={shouldReduceMotion ? {} : { scale: 1.1, rotate: 360 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#7E1A95] text-white font-bold">
           {number}
-        </motion.div>
+        </div>
         <div className="flex-1">
           <h4 className="text-lg font-extrabold text-[#1F1F1F]">{title}</h4>
           <p className="mt-1 text-gray-700">{desc}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -463,10 +335,9 @@ function WhoItem({ icon, text }: { icon: React.ReactNode; text: string }) {
 
 function LecturerCarousel() {
   const [selectedLecturer, setSelectedLecturer] = useState<Lecturer | null>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
-  const shouldReduceMotion = useReducedMotion()
+  const [isHovered, setIsHovered] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<number>(0)
 
   const lecturers: Lecturer[] = [
     {
@@ -502,80 +373,135 @@ function LecturerCarousel() {
       linkedin: "#",
     },
   ]
+  
+  // Animation rationale: Infinite scroll triggers only when section is in view for performance
+  const carouselRef = useRef(null)
+  const isInView = useInView(carouselRef, { amount: 0.3 })
 
-  // Duplicate lecturers for infinite scroll
+  // Duplicate lecturers array for seamless infinite scroll
   const duplicatedLecturers = [...lecturers, ...lecturers, ...lecturers]
+  const cardWidth = 288 // w-72 = 18rem = 288px
+  const gap = 24 // gap-6 = 1.5rem = 24px
+  const totalCardWidth = cardWidth + gap
 
-  // Check if carousel is in view
+  // Auto-scroll functionality
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting)
-      },
-      { threshold: 0.3 }
-    )
+    if (!isInView || isHovered) return
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
+    const scroll = () => {
+      if (scrollRef.current) {
+        const container = scrollRef.current
+        container.scrollLeft += 1 // Smooth 1px increment
+
+        // Reset to beginning of second set when reaching end of second set
+        if (container.scrollLeft >= totalCardWidth * lecturers.length * 2) {
+          container.scrollLeft = totalCardWidth * lecturers.length
+        }
+      }
+      animationRef.current = requestAnimationFrame(scroll)
     }
 
-    return () => observer.disconnect()
-  }, [])
+    animationRef.current = requestAnimationFrame(scroll)
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [isInView, isHovered, totalCardWidth, lecturers.length])
+
+  // Initialize scroll position to middle set for seamless infinite effect
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = totalCardWidth * lecturers.length
+    }
+  }, [lecturers.length, totalCardWidth])
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ 
+        left: -totalCardWidth, 
+        behavior: "smooth" 
+      })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ 
+        left: totalCardWidth, 
+        behavior: "smooth" 
+      })
+    }
+  }
 
   return (
     <>
-      <motion.div 
-        ref={containerRef}
-        className="relative mt-10 overflow-hidden"
-        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
-        viewport={{ once: true, margin: "-100px" }}
+      <div 
+        className="relative mt-10" 
+        ref={carouselRef}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <motion.div
-          ref={carouselRef}
-          className="flex gap-6"
-          animate={isInView && !shouldReduceMotion ? {
-            x: [0, -320 * lecturers.length]
-          } : {}}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 20,
-              ease: "linear"
-            }
-          }}
-          style={{
-            width: `${320 * duplicatedLecturers.length}px`
+        {/* Left chevron - Always visible for manual control */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow opacity-80 hover:opacity-100"
+          aria-label="Previous lecturers"
+        >
+          <ChevronLeft className="h-6 w-6 text-gray-600" />
+        </button>
+
+        {/* Right chevron - Always visible for manual control */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow opacity-80 hover:opacity-100"
+          aria-label="Next lecturers"
+        >
+          <ChevronRight className="h-6 w-6 text-gray-600" />
+        </button>
+
+        {/* Cards container with infinite scroll */}
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-hidden px-8 touch-pan-x"
+          style={{ 
+            scrollbarWidth: "none", 
+            msOverflowStyle: "none",
+            scrollBehavior: "auto" // Prevents conflict with manual smooth scrolling
           }}
         >
           {duplicatedLecturers.map((lecturer, index) => (
             <LecturerCard 
-              key={`${lecturer.id}-${index}`} 
+              key={`${lecturer.id}-${Math.floor(index / lecturers.length)}`}
               lecturer={lecturer} 
               onClick={() => setSelectedLecturer(lecturer)} 
             />
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
 
-      {/* Modal */}
+        {/* Simplified dots indicator showing original set only */}
+        <div className="flex justify-center mt-6 gap-2">
+          {lecturers.map((_, index) => (
+            <div
+              key={index}
+              className="w-2 h-2 rounded-full bg-gray-300"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Modal - with subtle entrance animation */}
       {selectedLecturer && <LecturerModal lecturer={selectedLecturer} onClose={() => setSelectedLecturer(null)} />}
     </>
   )
 }
 
 function LecturerCard({ lecturer, onClick }: { lecturer: Lecturer; onClick: () => void }) {
-  const shouldReduceMotion = useReducedMotion()
-
   return (
-    <motion.div
-      className="flex-shrink-0 w-72 bg-[#F9F5FF] rounded-2xl shadow-sm ring-1 ring-[#7E1A95] cursor-pointer hover:shadow-md transition-shadow select-none overflow-hidden"
+    <div
+      className="flex-shrink-0 w-72 bg-[#F9F5FF] rounded-2xl shadow-sm ring-1 ring-[#7E1A95] cursor-pointer hover:shadow-md transition-shadow select-none overflow-hidden hover:scale-[1.02]"
       onClick={onClick}
-      whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -5 }}
-      whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <div className="aspect-[4/3] relative">
         <Image
@@ -590,7 +516,7 @@ function LecturerCard({ lecturer, onClick }: { lecturer: Lecturer; onClick: () =
         <h4 className="text-xl font-extrabold text-[#1F1F1F] mb-1">{lecturer.name}</h4>
         <p className="text-gray-700 text-sm leading-relaxed">{lecturer.title}</p>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

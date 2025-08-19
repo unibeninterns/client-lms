@@ -44,7 +44,17 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .prefers-reduced-motion {
+    transition: none;
+  }
+}
 
+.prefers-reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
 
 :root {
   --radius: 0.625rem;

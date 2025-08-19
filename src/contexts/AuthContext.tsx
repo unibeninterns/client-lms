@@ -24,6 +24,7 @@ interface User {
 interface AuthContextType {
   adminLogin: (email: string, password: string) => Promise<boolean>;
   studentLogin: (email: string, password: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<void>; // Generic login for compatibility
   register: (data: {
     first_name: string;
     last_name: string;
@@ -36,6 +37,7 @@ interface AuthContextType {
   isStudent: boolean;
   user: User | null;
   loading: boolean;
+  isLoading: boolean; // Alias for compatibility
   error: string | null;
   checkAuth: () => Promise<boolean>;
   clearError: () => void;
@@ -43,17 +45,21 @@ interface AuthContextType {
 
 interface AuthProviderProps {
   children: ReactNode;
+  userType?: 'admin' | 'student';
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ 
+  children, 
+  userType = 'student' 
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  console.log("AuthProvider initialized");
+  console.log(`AuthProvider initialized for userType: ${userType}`);
 
   const checkAuth = useCallback(async (): Promise<boolean> => {
     console.log("Checking authentication...");
@@ -78,8 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser({
           ...response,
           isAuthenticated: true,
-          // Role should come from the backend response now
-          role: response.role || 'student', // Default to student if role not provided
+          role: response.role || 'student',
         });
         return true;
       } catch (error: unknown) {
@@ -139,12 +144,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Use the dedicated admin login endpoint
       const data = await authApi.adminLogin({ email, password });
       
-      // The backend should validate admin role and return appropriate user data
+      // Validate that user has admin role
+      if (data.user.role !== 'admin') {
+        throw new Error('Access denied. Admin privileges required.');
+      }
+      
       setUser({
         ...data.user,
         isAuthenticated: true,
-        role: data.user.role || "admin", // Backend should set this
+        role: 'admin',
       });
+
+      // Redirect to admin dashboard
+      router.push('/admin/dashboard');
       return true;
     } catch (error: unknown) {
       console.error("Admin login failed:", error);
@@ -165,11 +177,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       // Use the regular login endpoint for students
       const data = await authApi.login({ email, password });
+      
       setUser({
         ...data.user,
         isAuthenticated: true,
-        role: data.user.role || "student", // Backend should set this
+        role: data.user.role || 'student',
       });
+
+      // Redirect to student dashboard
+      router.push('/student/dashboard');
       return true;
     } catch (error: unknown) {
       console.error("Student login failed:", error);
@@ -181,6 +197,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       throw new Error(errorMessage);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Generic login function for backward compatibility
+  const login = async (email: string, password: string): Promise<void> => {
+    try {
+      if (userType === 'admin') {
+        await adminLogin(email, password);
+      } else {
+        await studentLogin(email, password);
+      }
+    } catch (error) {
+      // Error is already set in the specific login functions
+      throw error;
     }
   };
 
@@ -223,7 +253,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(null);
       setError(null);
       setLoading(false);
-      router.push("/");
+      
+      // Redirect based on user type
+      if (userType === 'admin') {
+        router.push("/admin/login");
+      } else {
+        router.push("/login");
+      }
     }
   };
 
@@ -234,9 +270,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const contextValue: AuthContextType = {
     user,
     loading,
+    isLoading: loading, // Alias for compatibility
     error,
     adminLogin,
     studentLogin,
+    login,
     register,
     logout,
     checkAuth,
@@ -310,13 +348,13 @@ export function withAdminAuth<P extends object>(Component: React.ComponentType<P
           setRetryCount((prev) => prev + 1);
           const success = await checkAuth();
           if (!success || !isAdmin) {
-            router.push("/admin-login");
+            router.push("/admin/login");
           }
         };
         retryAuth();
       } else if (!loading) {
         if (!user) {
-          router.push("/admin-login");
+          router.push("/admin/login");
         } else if (!isAdmin) {
           router.push("/");
         }
@@ -344,13 +382,13 @@ export function withStudentAuth<P extends object>(Component: React.ComponentType
           setRetryCount((prev) => prev + 1);
           const success = await checkAuth();
           if (!success || !isStudent) {
-            router.push("/student-login");
+            router.push("/student/login");
           }
         };
         retryAuth();
       } else if (!loading) {
         if (!user) {
-          router.push("/student-login");
+          router.push("/student/login");
         } else if (!isStudent) {
           router.push("/");
         }

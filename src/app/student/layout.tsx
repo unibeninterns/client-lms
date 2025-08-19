@@ -1,14 +1,13 @@
-import type React from "react"
 import type { Metadata } from "next"
 import { AuthProvider } from '@/contexts/AuthContext';
 import { StudentLayout } from "@/components/student/StudentLayout"
 
 export const metadata: Metadata = {
   title: "DRID - Learning Management System",
-  description: "Dashboard",
+  description: "Student Dashboard",
 }
 
-export default function RootLayout({
+export default function StudentRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
