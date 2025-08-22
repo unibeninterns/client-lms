@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle, Clock, Lock, Calendar, Users, Download, ChevronDown, TrendingUp } from "lucide-react"
 import { AdminLayout } from "@/components/admin/AdminLayout"
+import Image from "next/image"
 
 export default function Dashboard() {
   return (
@@ -21,7 +22,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="hidden lg:block">
-          <img src="/laboratory-beaker-flask-science.png" alt="Laboratory beaker" className="w-30 h-30 opacity-60" />
+          <Image src="/laboratory-beaker-flask-science.png" alt="Laboratory beaker" width={120} height={120} className="opacity-60" />
         </div>
       </div>
 

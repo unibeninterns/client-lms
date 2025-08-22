@@ -10,12 +10,15 @@ import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react'
 import Image from "next/image"
 
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""
+
 export default function Page() {
   const [showPass, setShowPass] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
   const [formError, setFormError] = useState("")
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const { studentLogin, isLoading, error, clearError } = useAuth()
 
   // Clear form error when user starts typing
@@ -54,6 +57,28 @@ export default function Page() {
     } catch (err: unknown) {
       console.error('Login submission error:', err)
       setFormError((err as Error).message || 'Login failed. Please try again.')
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    if (!GOOGLE_CLIENT_ID) {
+      setFormError('Google OAuth is not configured')
+      return
+    }
+    
+    const GOOGLE_OAUTH_URL = `https://accounts.google.com/oauth/authorize?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(window.location.origin + '/auth/google/callback')}&response_type=code&scope=openid%20email%20profile`
+
+    setIsGoogleLoading(true)
+    setFormError("")
+    clearError()
+    
+    try {
+      // Redirect to Google OAuth
+      window.location.href = GOOGLE_OAUTH_URL
+    } catch (err: unknown) {
+      console.error('Google login error:', err)
+      setFormError('Failed to initiate Google login')
+      setIsGoogleLoading(false)
     }
   }
 
@@ -96,7 +121,7 @@ export default function Page() {
               onChange={(e) => setEmail(e.target.value)}
               aria-label="Username or Email"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
           </div>
         </div>
@@ -117,14 +142,14 @@ export default function Page() {
               onChange={(e) => setPassword(e.target.value)}
               aria-label="Password"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
             <button
               type="button"
               aria-label={showPass ? "Hide password" : "Show password"}
               onClick={() => setShowPass((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground disabled:opacity-50"
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             >
               {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -139,7 +164,7 @@ export default function Page() {
               className="mt-0.5 border-[#6d0d75] data-[state=checked]:bg-[#6d0d75]" 
               checked={rememberMe}
               onCheckedChange={(checked) => setRememberMe(!!checked)}
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
             <span className="text-muted-foreground">Remember me</span>
           </label>
@@ -152,7 +177,7 @@ export default function Page() {
         <Button
           type="submit"
           className="w-full h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] text-white font-medium disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading}
         >
           {isLoading ? (
             <>
@@ -174,19 +199,24 @@ export default function Page() {
         {/* Google tile */}
         <button
           type="button"
-          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={handleGoogleLogin}
+          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Continue with Google"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || !GOOGLE_CLIENT_ID}
         >
-          <span>
-            <Image
-              src="/google.png"
-              width={100}
-              height={48}
-              className="w-3 md:w-4"
-              alt="Google Logo"
-            />
-          </span>
+          {isGoogleLoading ? (
+            <Loader2 className="animate-spin h-4 w-4 text-gray-600" />
+          ) : (
+            <span>
+              <Image
+                src="/google.png"
+                width={100}
+                height={48}
+                className="w-3 md:w-4"
+                alt="Google Logo"
+              />
+            </span>
+          )}
         </button>
 
         {/* Footer switch */}

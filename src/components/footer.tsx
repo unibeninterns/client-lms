@@ -76,42 +76,42 @@ export default function Footer() {
 
           {/* Link Columns (right) */}
           <div className="lg:col-span-2">
-            <h3 className="text-xl font-extrabold mb-6">DRID</h3>
-            <ul className="space-y-4 text-white/85">
-              <li><Link href="#" className="hover:text-white">About DRID</Link></li>
-              <li><Link href="#" className="hover:text-white">Mission &amp; Vision</Link></li>
-            </ul>
-          </div>
+  <h3 className="text-xl font-extrabold mb-6">DRID</h3>
+  <ul className="space-y-4 text-white/85">
+    <li><Link href="/about-course" className="hover:text-white">About DRID</Link></li>
+    <li><Link href="/about-course#learning-experience" className="hover:text-white">Mission &amp; Vision</Link></li>
+  </ul>
+</div>
 
           <div className="lg:col-span-2">
-            <h3 className="text-xl font-extrabold mb-6">Courses</h3>
-            <ul className="space-y-4 text-white/85">
-              <li><Link href="#" className="hover:text-white">Course Overview</Link></li>
-              <li><Link href="#" className="hover:text-white">Curriculum</Link></li>
-              <li><Link href="#" className="hover:text-white">Faculty</Link></li>
-              <li><Link href="#" className="hover:text-white">FAQ</Link></li>
-            </ul>
-          </div>
+  <h3 className="text-xl font-extrabold mb-6">Courses</h3>
+  <ul className="space-y-4 text-white/85">
+    <li><Link href="/about-course#features" className="hover:text-white">Course Overview</Link></li>
+    <li><Link href="/about-course#curriculum" className="hover:text-white">Curriculum</Link></li>
+    <li><Link href="/about-course#lecturers" className="hover:text-white">Faculty</Link></li>
+    <li><Link href="/about-course#faq" className="hover:text-white">FAQ</Link></li>
+  </ul>
+</div>
 
           <div className="lg:col-span-2">
-            <h3 className="text-xl font-extrabold mb-6">Resources</h3>
-            <ul className="space-y-4 text-white/85">
-              <li><Link href="#" className="hover:text-white">Reviews</Link></li>
-              <li><Link href="#" className="hover:text-white">Pricing</Link></li>
-              <li><Link href="#" className="hover:text-white">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-white">Terms of Use</Link></li>
-              <li><Link href="#" className="hover:text-white">Help Center</Link></li>
-              <li><Link href="#" className="hover:text-white">Contact</Link></li>
-              <li><Link
-            href="#"
-            aria-label="LinkedIn"
-            className="lg:hidden inline-flex items-center gap-2 text-white/85 hover:text-white"
-          >
-            <span>LinkedIn</span>
-            <Linkedin className="h-5 w-5" />
-          </Link></li>
-            </ul>
-          </div>
+  <h3 className="text-xl font-extrabold mb-6">Resources</h3>
+  <ul className="space-y-4 text-white/85">
+    <li><Link href="/reviews" className="hover:text-white">Reviews</Link></li>
+    <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
+    <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
+    <li><Link href="/terms" className="hover:text-white">Terms of Use</Link></li>
+    <li><Link href="/help" className="hover:text-white">Help Center</Link></li>
+    <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+    <li><Link
+      href="https://linkedin.com/company/drid-uniben"
+      aria-label="LinkedIn"
+      className="lg:hidden inline-flex items-center gap-2 text-white/85 hover:text-white"
+    >
+      <span>LinkedIn</span>
+      <Linkedin className="h-5 w-5" />
+    </Link></li>
+  </ul>
+</div>
         </div>
 
         {/* Bottom bar */}

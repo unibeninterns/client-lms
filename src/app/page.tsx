@@ -30,11 +30,6 @@ export default function Page() {
     transition: { duration: shouldReduceMotion ? 0 : 0.5 }
   }
 
-  const scaleOnHover = {
-    whileHover: shouldReduceMotion ? {} : { scale: 1.02 },
-    transition: { duration: 0.2, ease: easeOut }
-  }
-
   const buttonHover = {
     whileHover: shouldReduceMotion ? {} : { scale: 1.05, y: -2 },
     whileTap: shouldReduceMotion ? {} : { scale: 0.95 },
@@ -42,11 +37,13 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
       <Header />
 
       {/* Hero */}
       <section className="relative bg-[url('/hero-image.png')] bg-no-repeat bg-cover bg-center">
+      {/* Overlay */}
+  <div className="lg:hidden absolute inset-0 bg-[#351046] opacity-70"></div>
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 md:pt-16 md:pb-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-14 lg:mt-">
@@ -94,29 +91,29 @@ export default function Page() {
 
             {/* Hero Illustration */}
             <motion.div 
-              className="relative"
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: easeOut, delay: shouldReduceMotion ? 0 : 0.3 }}
-            >
-              <motion.div 
-                className="relative hover:transform hover:rotate-3 rotate-0 hover:transition-transform duration-500"
-                whileHover={shouldReduceMotion ? {} : { rotate: 3, scale: 1.02 }}
-                transition={{ duration: 0.5, ease: easeOut }}
-              >
-              <div className="absolute -inset-6" aria-hidden="true" />
-              <div className="relative rounded-[20px] p-1 md:p-2">
-                <Image
-                  src="/hero-illustration.png"
-                  width={820}
-                  height={620}
-                  alt="People collaborating at computers"
-                  className="w-full h-auto"
-                  priority
-                />
-              </div>
-            </motion.div>
-            </motion.div>
+  className="relative hidden lg:block"
+  initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: easeOut, delay: shouldReduceMotion ? 0 : 0.3 }}
+>
+  <motion.div 
+    className="relative hover:transform hover:rotate-3 rotate-0 hover:transition-transform duration-500"
+    whileHover={shouldReduceMotion ? {} : { rotate: 3, scale: 1.02 }}
+    transition={{ duration: 0.5, ease: easeOut }}
+  >
+    <div className="absolute -inset-6" aria-hidden="true" />
+    <div className="relative rounded-[20px] p-1 md:p-2">
+      <Image
+        src="/hero-illustration.png"
+        width={820}
+        height={620}
+        alt="People collaborating at computers"
+        className="w-full h-auto"
+        priority
+      />
+    </div>
+  </motion.div>
+</motion.div>
           </div>
         </div>
       </section>

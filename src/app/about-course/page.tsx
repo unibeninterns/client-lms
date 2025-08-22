@@ -5,14 +5,14 @@ import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { CalendarDays, Monitor, Video, ListChecks, BriefcaseBusiness, BadgeCheck, MessageSquare, CreditCard, Check, GraduationCap, Search, Presentation, Lightbulb, Briefcase, ChevronDown, ChevronRight, X, ChevronLeft } from 'lucide-react'
-import { motion, useReducedMotion, useInView } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export default function AboutCoursePage() {
   const shouldReduceMotion = useReducedMotion()
   
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
       <Header />
 
       {/* Hero section */}
@@ -78,7 +78,7 @@ export default function AboutCoursePage() {
 </section>
 
       {/* Learning Experience */}
-      <div className="bg-gradient-to-br from-pink-50 to-purple-50">
+      <div id="learning-experience" className="bg-gradient-to-br from-pink-50 to-purple-50">
   <section className="py-14 md:py-20 lg:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid md:grid-cols-2 gap-10 items-stretch">
@@ -147,7 +147,7 @@ export default function AboutCoursePage() {
   </section>
 
           {/* Nutshell feature cards (8) */}
-          <section className="pt-1 md:pt-2 lg:pt-2 pb-14 md:pb-20 lg:pb-24">
+          <section id="features" className="pt-1 md:pt-2 lg:pt-2 pb-14 md:pb-20 lg:pb-24">
   <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <motion.h3 
       className="mt-10 md:mt-12 text-2xl md:text-3xl font-extrabold text-center text-[#1F1F1F]"
@@ -283,7 +283,7 @@ export default function AboutCoursePage() {
 
       {/* Meet Your Lecturers */}
       <div className="bg-gradient-to-br from-gray-50 to-purple-50">
-        <section className="py-16 md:py-20 lg:py-24">
+        <section id="lecturers" className="py-16 md:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Meet Your Lecturers</h2>
@@ -321,7 +321,7 @@ export default function AboutCoursePage() {
             </div>
 
             {/* FAQ */}
-            <div className="rounded-2xl ring-1 ring-fuchsia-200 shadow-lg p-8">
+            <div id="faq" className="rounded-2xl ring-1 ring-fuchsia-200 shadow-lg p-8">
               <h3 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Frequently Asked Questions</h3>
               <FAQSection />
             </div>
@@ -465,7 +465,10 @@ function LecturerCarousel() {
   const [selectedLecturer, setSelectedLecturer] = useState<Lecturer | null>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<number>(0)
   const [isInView, setIsInView] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const [currentOffset, setCurrentOffset] = useState(0)
   const shouldReduceMotion = useReducedMotion()
 
   const lecturers: Lecturer[] = [
@@ -505,8 +508,22 @@ function LecturerCarousel() {
 
   // Duplicate lecturers for infinite scroll
   const duplicatedLecturers = [...lecturers, ...lecturers, ...lecturers]
+  const cardWidth = 320 // 288px width + 24px gap
+  const maxOffset = -(cardWidth * lecturers.length)
 
-  // Check if carousel is in view
+  // Auto-scroll animation
+  const animate = useCallback(() => {
+    if (!isInView || isPaused || shouldReduceMotion) return
+
+    setCurrentOffset(prev => {
+      const newOffset = prev - 1
+      return newOffset <= maxOffset ? 0 : newOffset
+    })
+
+    animationRef.current = requestAnimationFrame(animate)
+  }, [isInView, isPaused, shouldReduceMotion, maxOffset])
+
+  // Start/stop animation based on viewport visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -522,6 +539,34 @@ function LecturerCarousel() {
     return () => observer.disconnect()
   }, [])
 
+  // Handle animation lifecycle
+  useEffect(() => {
+    if (isInView && !isPaused && !shouldReduceMotion) {
+      animationRef.current = requestAnimationFrame(animate)
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [isInView, isPaused, shouldReduceMotion, animate])
+
+  const scrollLeft = () => {
+    setCurrentOffset(prev => Math.min(prev + cardWidth, 0))
+  }
+
+  const scrollRight = () => {
+    setCurrentOffset(prev => {
+      const newOffset = prev - cardWidth
+      return newOffset <= maxOffset ? maxOffset : newOffset
+    })
+  }
+
   return (
     <>
       <motion.div 
@@ -531,23 +576,32 @@ function LecturerCarousel() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
         viewport={{ once: true, margin: "-100px" }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        <motion.div
+        {/* Navigation Buttons */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+          aria-label="Previous lecturers"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        
+        <button
+          onClick={scrollRight}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+          aria-label="Next lecturers"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        <div
           ref={carouselRef}
-          className="flex gap-6"
-          animate={isInView && !shouldReduceMotion ? {
-            x: [0, -320 * lecturers.length]
-          } : {}}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 20,
-              ease: "linear"
-            }
-          }}
+          className="flex gap-6 transition-transform duration-300 ease-out"
           style={{
-            width: `${320 * duplicatedLecturers.length}px`
+            transform: `translateX(${currentOffset}px)`,
+            width: `${cardWidth * duplicatedLecturers.length}px`
           }}
         >
           {duplicatedLecturers.map((lecturer, index) => (
@@ -557,7 +611,7 @@ function LecturerCarousel() {
               onClick={() => setSelectedLecturer(lecturer)} 
             />
           ))}
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* Modal */}

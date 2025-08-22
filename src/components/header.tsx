@@ -16,7 +16,7 @@ const nav = [
   { href: "/", label: "Home", description: "Go to the homepage" },
   { href: "/about-course", label: "About Course", description: "Learn more about the course" },
   { href: "/pricing", label: "Pricing", description: "View our pricing plans" },
-  { href: "/my-classroom", label: "My Classroom", description: "Access your classroom" },
+  { href: "/student/classroom", label: "My Classroom", description: "Access your classroom" },
 ]
 
 export default function Header() {

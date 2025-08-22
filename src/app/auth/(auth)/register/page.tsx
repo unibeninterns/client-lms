@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, User, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react'
 import Image from "next/image"
 
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""
+
 export default function Page() {
   const [showPass, setShowPass] = useState(false)
   const [firstName, setFirstName] = useState("")
@@ -19,6 +21,7 @@ export default function Page() {
   const [password, setPassword] = useState("")
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [formError, setFormError] = useState("")
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const { register, isLoading, error, clearError } = useAuth()
   const router = useRouter()
 
@@ -77,6 +80,29 @@ export default function Page() {
     }
   }
 
+  const handleGoogleRegister = async () => {
+    if (!GOOGLE_CLIENT_ID) {
+      setFormError('Google OAuth is not configured')
+      return
+    }
+    
+    const GOOGLE_OAUTH_URL = `https://accounts.google.com/oauth/authorize?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(window.location.origin + '/auth/google/callback')}&response_type=code&scope=openid%20email%20profile`
+
+    setIsGoogleLoading(true)
+    setFormError("")
+    clearError()
+    
+    try {
+      // Redirect to Google OAuth with register flag
+      const registerUrl = `${GOOGLE_OAUTH_URL}&state=register`
+      window.location.href = registerUrl
+    } catch (err: unknown) {
+      console.error('Google register error:', err)
+      setFormError('Failed to initiate Google registration')
+      setIsGoogleLoading(false)
+    }
+  }
+
   // Don't clear fields on error - let user correct their input
   const displayError = formError || error
 
@@ -116,7 +142,7 @@ export default function Page() {
               onChange={(e) => setFirstName(e.target.value)}
               aria-label="First Name"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
           </div>
         </div>
@@ -137,7 +163,7 @@ export default function Page() {
               onChange={(e) => setLastName(e.target.value)}
               aria-label="Last Name"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
           </div>
         </div>
@@ -158,7 +184,7 @@ export default function Page() {
               onChange={(e) => setEmail(e.target.value)}
               aria-label="Email Address"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
           </div>
         </div>
@@ -179,14 +205,14 @@ export default function Page() {
               onChange={(e) => setPassword(e.target.value)}
               aria-label="Password"
               required
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             />
             <button
               type="button"
               aria-label={showPass ? "Hide password" : "Show password"}
               onClick={() => setShowPass((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground disabled:opacity-50"
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             >
               {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -200,7 +226,7 @@ export default function Page() {
             className="mt-0.5 border-[#6d0d75] data-[state=checked]:bg-[#6d0d75]"
             checked={acceptTerms}
             onCheckedChange={(checked) => setAcceptTerms(!!checked)}
-            disabled={isLoading}
+            disabled={isLoading || isGoogleLoading}
           />
           <label htmlFor="terms" className="select-none text-muted-foreground">
             I agree to the{" "}
@@ -219,7 +245,7 @@ export default function Page() {
         <Button
           type="submit"
           className="w-full h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] text-white font-medium disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading}
         >
           {isLoading ? (
             <>
@@ -241,19 +267,24 @@ export default function Page() {
         {/* Google tile */}
         <button
           type="button"
-          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={handleGoogleRegister}
+          className="mx-auto grid place-items-center h-12 w-12 rounded-xl border bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Continue with Google"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || !GOOGLE_CLIENT_ID}
         >
-          <span>
-            <Image
-              src="/google.png"
-              width={100}
-              height={48}
-              className="w-3 md:w-4"
-              alt="Google Logo"
-            />
-          </span>
+          {isGoogleLoading ? (
+            <Loader2 className="animate-spin h-4 w-4 text-gray-600" />
+          ) : (
+            <span>
+              <Image
+                src="/google.png"
+                width={100}
+                height={48}
+                className="w-3 md:w-4"
+                alt="Google Logo"
+              />
+            </span>
+          )}
         </button>
 
         {/* Footer switch */}

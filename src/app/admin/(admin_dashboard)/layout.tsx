@@ -1,20 +1,19 @@
 import type { Metadata } from "next"
 import { AuthProvider } from '@/contexts/AuthContext';
-import { StudentLayout } from "@/components/student/StudentLayout"
 
 export const metadata: Metadata = {
   title: "DRID - Learning Management System",
-  description: "Student Dashboard",
+  description: "Admin Dashboard",
 }
 
-export default function StudentRootLayout({
+export default function AdminRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-        <AuthProvider userType="student" requireAuth={true}>
-        <StudentLayout>{children}</StudentLayout>
+        <AuthProvider userType="admin" requireAuth={true}>
+        {children}
         </AuthProvider>
   )
 }

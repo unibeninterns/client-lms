@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthProvider } from "@/contexts/AuthContext";
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -8,6 +9,7 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   return (
+    <AuthProvider userType="admin">
     <div className="relative min-h-screen">
       {/* Background image using Next.js Image with fill to cover the screen */}
       <div className="fixed inset-0 -z-10">
@@ -66,5 +68,6 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
         </div>
       </main>
     </div>
+    </AuthProvider>
   )
 }

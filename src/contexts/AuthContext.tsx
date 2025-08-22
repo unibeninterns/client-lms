@@ -31,6 +31,7 @@ interface AuthContextType {
     email: string;
     password: string;
   }) => Promise<boolean>;
+  googleAuth: (code: string, isRegister?: boolean) => Promise<boolean>;
   logout: () => Promise<void>;
   isAuthenticated: boolean;
   isAdmin: boolean;
@@ -46,13 +47,15 @@ interface AuthContextType {
 interface AuthProviderProps {
   children: ReactNode;
   userType?: 'admin' | 'student';
+  requireAuth?: boolean; // Add requireAuth prop
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ 
   children, 
-  userType = 'student' 
+  userType = 'student',
+  requireAuth = false // Default to false
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -132,10 +135,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     }
   }, []);
 
-  // Run auth check on initial load
+  // Run auth check on initial load ONLY if required
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    if (requireAuth) {
+      checkAuth();
+    } else {
+      setLoading(false); // On guest pages, we're not loading a user
+    }
+  }, [checkAuth, requireAuth]);
 
   const adminLogin = async (email: string, password: string): Promise<boolean> => {
     setLoading(true);
@@ -238,6 +245,67 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     }
   };
 
+  const googleAuth = async (code: string, isRegister: boolean = false): Promise<boolean> => {
+    setLoading(true);
+    setError(null);
+    try {
+      // First, exchange the code for an access token with Google
+      const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          code,
+          client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
+          client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || '',
+          redirect_uri: `${window.location.origin}/auth/google/callback`,
+          grant_type: 'authorization_code',
+        }),
+      });
+
+      if (!tokenResponse.ok) {
+        throw new Error('Failed to exchange Google authorization code');
+      }
+
+      const tokenData = await tokenResponse.json();
+      
+      // Use the access token to authenticate with your backend
+      const data = await authApi.googleLogin({ 
+        access_token: tokenData.access_token,
+      });
+      
+      setUser({
+        ...data.user,
+        isAuthenticated: true,
+        role: data.user.role || 'student',
+      });
+
+      // Redirect based on user role and whether this was registration or login
+      if (data.user.role === 'admin') {
+        router.push('/admin/dashboard');
+      } else {
+        if (isRegister) {
+          router.push('/auth/register/success');
+        } else {
+          router.push('/student/dashboard');
+        }
+      }
+      
+      return true;
+    } catch (error: unknown) {
+      console.error("Google authentication failed:", error);
+      const errorMessage = (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.detail || 
+                          (error as { response?: { data?: { detail?: string; message?: string; }; }; message?: string; }).response?.data?.message || 
+                          (error as Error).message || 
+                          "Google authentication failed";
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async (): Promise<void> => {
     setLoading(true);
     try {
@@ -258,7 +326,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
       if (userType === 'admin') {
         router.push("/admin/login");
       } else {
-        router.push("/login");
+        router.push("auth/login");
       }
     }
   };
@@ -276,6 +344,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     studentLogin,
     login,
     register,
+    googleAuth,
     logout,
     checkAuth,
     clearError,
@@ -317,13 +386,13 @@ export function withAuth<P extends object>(Component: React.ComponentType<P>) {
           const success = await checkAuth();
           if (!success) {
             console.log("Auth retry failed, redirecting to login");
-            router.push("/login");
+            router.push("auth/login");
           }
         };
         retryAuth();
       } else if (!loading && !user && retryCount >= MAX_RETRIES) {
         console.log("Max retries reached, redirecting to login");
-        router.push("/login");
+        router.push("auth/login");
       }
     }, [user, loading, error, router, checkAuth, retryCount]);
 
@@ -382,13 +451,13 @@ export function withStudentAuth<P extends object>(Component: React.ComponentType
           setRetryCount((prev) => prev + 1);
           const success = await checkAuth();
           if (!success || !isStudent) {
-            router.push("/student/login");
+            router.push("/auth/login");
           }
         };
         retryAuth();
       } else if (!loading) {
         if (!user) {
-          router.push("/student/login");
+          router.push("/auth/login");
         } else if (!isStudent) {
           router.push("/");
         }
