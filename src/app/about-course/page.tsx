@@ -296,7 +296,7 @@ export default function AboutCoursePage() {
       
 
       {/* Certification & FAQ */}
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="py-10 md:py-14 lg:py-18">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Certification Criteria */}
@@ -331,7 +331,7 @@ export default function AboutCoursePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="py-10 md:py-14 lg:py-18">
         <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Ready to take the next step?</h2>
           <p className="mt-3 text-gray-700 text-lg">Join other research professionals building the future.</p>

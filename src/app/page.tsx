@@ -121,8 +121,8 @@ export default function Page() {
 
       <div className="bg-[#FBEFFF]">
       {/* About the DRID Course */}
-      <section className="py-13 md:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <section className="py-6 md:py-10 lg:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center">
           <motion.div {...fadeInUp} viewport={{ once: true, margin: "10px" }}>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"About the DRID Course"}</h2>
             <p className="mt-4 text-gray-700 text-lg max-w-2xl">
@@ -177,7 +177,7 @@ export default function Page() {
       </section>
 
       {/* Course Modules Preview */}
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="py-8 md:py-10 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center"
@@ -256,7 +256,7 @@ export default function Page() {
       </section>
 
       {/* What learners are saying */}
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="py-8 md:py-10 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
             className="text-center text-3xl md:text-4xl font-extrabold text-[#1F1F1F]"
@@ -297,7 +297,7 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="pt-8 pb-6 md:pt-10 lg:pt-12">
         <motion.div 
           className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
           {...fadeInUp}
@@ -333,7 +333,7 @@ export default function Page() {
       </section>
 
       {/* Final CTA */}
-      <section id="register" className="py-16 md:py-20 lg:py-24">
+      <section id="register" className="py-8 md:py-10 lg:py-12">
         <motion.div 
           className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
           {...fadeInUp}
