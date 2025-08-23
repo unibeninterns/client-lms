@@ -1,10 +1,11 @@
 "use client"
 
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import Image from "next/image"
-import { ArrowRight, Award, GraduationCap, Quote, Search } from 'lucide-react'
-import { motion, useReducedMotion, easeOut, easeInOut } from "framer-motion"
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Image from "next/image";
+import { ScholarCap, Search, Project, Badge } from "@/components/icons/index";
+import { ArrowRight, Quote } from 'lucide-react';
+import { motion, useReducedMotion, easeOut, easeInOut } from "framer-motion";
 
 export default function Page() {
   const shouldReduceMotion = useReducedMotion()
@@ -118,10 +119,11 @@ export default function Page() {
         </div>
       </section>
 
+      <div className="bg-[#FBEFFF]">
       {/* About the DRID Course */}
       <section className="py-13 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div {...fadeInUp} viewport={{ once: true, margin: "-100px" }}>
+          <motion.div {...fadeInUp} viewport={{ once: true, margin: "10px" }}>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"About the DRID Course"}</h2>
             <p className="mt-4 text-gray-700 text-lg max-w-2xl">
               {
@@ -137,19 +139,19 @@ export default function Page() {
               viewport={{ once: true, margin: "-50px" }}
             >
               <motion.li className="flex items-start gap-3" variants={staggerItem}>
-                <span><GraduationCap className="h-6 w-6 text-[#7E1A95]" /></span>
+                <span><ScholarCap/></span>
                 <span className="text-[#1F1F1F]">{"Learn from experienced faculty"}</span>
               </motion.li>
               <motion.li className="flex items-start gap-3" variants={staggerItem}>
-                <span><Search className="h-6 w-6 text-[#7E1A95]" /></span>
+                <span><Search/></span>
                 <span className="text-[#1F1F1F]">{"Research-driven practical insights"}</span>
               </motion.li>
               <motion.li className="flex items-start gap-3" variants={staggerItem}>
-                <span><Award className="h-6 w-6 text-[#7E1A95]" /></span>
+                <span><Badge/></span>
                 <span className="text-[#1F1F1F]">{"Award-winning curriculum"}</span>
               </motion.li>
               <motion.li className="flex items-start gap-3" variants={staggerItem}>
-                <span><Award className="h-6 w-6 text-[#7E1A95]" /></span>
+                <span><Project/></span>
                 <span className="text-[#1F1F1F]">{"Hands-on case studies and projects"}</span>
               </motion.li>
             </motion.ul>
@@ -160,14 +162,14 @@ export default function Page() {
             {...fadeInUp}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="absolute -inset-4 blur-4xl bg-gradient-to-br from-pink-50 to-purple-50" aria-hidden="true" />
+            <div className="absolute -inset-4 blur-4xl" aria-hidden="true" />
             <div className="relative hidden lg:block">
               <Image
                 src="/about-illustration.png"
                 width={900}
                 height={450}
                 alt="Course illustration with books, cap and magnifier"
-                className="w-full h-auto bg-gradient-to-br from-pink-50 to-purple-50"
+                className="w-full h-auto"
               />
             </div>
           </motion.div>
@@ -376,6 +378,7 @@ export default function Page() {
           </motion.div>
         </motion.div>
       </section>
+      </div>
       <Footer />
     </div>
   )

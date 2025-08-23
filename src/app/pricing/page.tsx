@@ -301,7 +301,7 @@ export default function PricingPage() {
               
 
                 <div className="overflow-x-auto flex items-center py-4 pl-2 border-t border-[#EAEAEA] mt-0.5">
-                <div className="mr-28 sm:mr-60 md:mr-80 lg:mr-48">
+                <div className="mr-16 sm:mr-60 md:mr-80 lg:mr-48">
                   <div className="text-sm font-bold text-[#1F1F1F]">
                   Total Value
                   </div>

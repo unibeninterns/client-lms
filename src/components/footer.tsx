@@ -52,24 +52,24 @@ export default function Footer() {
             </p>
 
             {/* Newsletter pill */}
-            <form className="mt-4 max-w-3xl" action="#" method="post">
-              <div className="flex items-stretch rounded-full border border-white/25 overflow-hidden bg-transparent">
+            <form className="mt-4 w-full max-w-3xl" action="#" method="post">
+              <div className="flex w-full rounded-full border border-white/25 overflow-hidden bg-transparent">
                 <input
                   type="email"
                   name="email"
                   required
-                  placeholder="Enter your email address"
-                  className="flex-1 bg-transparent px-5 py-4 text-white placeholder:text-white/70 focus:outline-none"
+                  placeholder="Email address"
+                  className="flex-grow min-w-0 bg-transparent px-5 py-4 text-white placeholder:text-white/70 focus:outline-none"
                   aria-label="Email address"
                 />
-                <div className="p-1">
-                  <button
-                    type="submit"
-                    className="h-full rounded-full bg-[#69117c] px-6 py-3 font-semibold text-white hover:bg-[#6F1584] transition-colors"
-                  >
-                    Notify Me
-                  </button>
-                </div>
+                <div className="p-1 flex-shrink-0">
+                    <button
+                      type="submit"
+                      className="h-full rounded-full bg-[#69117c] px-4 py-3 font-semibold text-white hover:bg-[#6F1584] transition-colors whitespace-nowrap"
+                    >
+                      Notify Me
+                    </button>
+                  </div>
               </div>
             </form>
           </div>

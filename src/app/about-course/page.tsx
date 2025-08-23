@@ -1,12 +1,13 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import { CalendarDays, Monitor, Video, ListChecks, BriefcaseBusiness, BadgeCheck, MessageSquare, CreditCard, Check, GraduationCap, Search, Presentation, Lightbulb, Briefcase, ChevronDown, ChevronRight, X, ChevronLeft } from 'lucide-react'
-import { motion, useReducedMotion } from "framer-motion"
-import { useCallback, useEffect, useRef, useState } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { Check, ChevronDown, ChevronRight, X, ChevronLeft } from 'lucide-react';
+import { ScholarCap, Search, Faculty, Bag, Bulb, Duration, Format, Sessions, Assessment, Capstone, Certification, Support, Fee } from "@/components/icons/index";
+import { motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function AboutCoursePage() {
   const shouldReduceMotion = useReducedMotion()
@@ -78,7 +79,7 @@ export default function AboutCoursePage() {
 </section>
 
       {/* Learning Experience */}
-      <div id="learning-experience" className="bg-gradient-to-br from-pink-50 to-purple-50">
+      <div id="learning-experience" className="bg-[#FBEFFF]">
   <section className="py-14 md:py-20 lg:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid md:grid-cols-2 gap-10 items-stretch">
@@ -173,42 +174,42 @@ export default function AboutCoursePage() {
       }}
     >
       <AnimatedFeatureCard
-        icon={<CalendarDays className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Duration/>}
         title="Duration"
         desc="12 weeks"
       />
       <AnimatedFeatureCard
-        icon={<Monitor className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Format/>}
         title="Format"
         desc="Fully online & self-paced"
       />
       <AnimatedFeatureCard
-        icon={<Video className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Sessions/>}
         title="Live Sessions"
         desc="2 weekly expert-led live sessions"
       />
       <AnimatedFeatureCard
-        icon={<ListChecks className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Assessment/>}
         title="Assessment"
         desc="Continuous quizzes + final project & exam"
       />
       <AnimatedFeatureCard
-        icon={<BriefcaseBusiness className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Capstone/>}
         title="Capstone Project"
         desc="Build and present a practical research portfolio"
       />
       <AnimatedFeatureCard
-        icon={<BadgeCheck className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Certification/>}
         title="Certification"
         desc="Digital diploma (with optional transcript)"
       />
       <AnimatedFeatureCard
-        icon={<MessageSquare className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Support/>}
         title="Support"
         desc="Personalized expert feedback available"
       />
       <AnimatedFeatureCard
-        icon={<CreditCard className="h-7 w-7 text-[#7E1A95]" />}
+        icon={<Fee/>}
         title="Fee"
         desc="₦50,000+ (see full pricing for breakdown)"
       />
@@ -272,11 +273,11 @@ export default function AboutCoursePage() {
             Who Should Enroll
           </h3>
           <ul className="mt-8 space-y-4 text-lg">
-            <WhoItem icon={<GraduationCap className="h-5 w-5 text-[#7E1A95]" />} text="Postgraduate students – seeking structured support in their research journey." />
-            <WhoItem icon={<Search className="h-5 w-5 text-[#7E1A95]" />} text="Early-career researchers – who want to strengthen their methodology and data skills." />
-            <WhoItem icon={<Presentation className="h-5 w-5 text-[#7E1A95]" />} text="Faculty and lecturers – aiming to update their research practice with digital tools." />
-            <WhoItem icon={<Briefcase className="h-5 w-5 text-[#7E1A95]" />} text="NGO researchers and data officers – working on evidence-based programs." />
-            <WhoItem icon={<Lightbulb className="h-5 w-5 text-[#7E1A95]" />} text="Innovation and grant-focused professionals – involved in proposal writing and research-driven projects." />
+            <WhoItem icon={<ScholarCap/>} text="Postgraduate students – seeking structured support in their research journey." />
+            <WhoItem icon={<Search/>} text="Early-career researchers – who want to strengthen their methodology and data skills." />
+            <WhoItem icon={<Faculty/>} text="Faculty and lecturers – aiming to update their research practice with digital tools." />
+            <WhoItem icon={<Bag/>} text="NGO researchers and data officers – working on evidence-based programs." />
+            <WhoItem icon={<Bulb/>} text="Innovation and grant-focused professionals – involved in proposal writing and research-driven projects." />
           </ul>
         </div>
       </section>
@@ -382,7 +383,7 @@ function AnimatedFeatureCard({
     >
       <div className="flex items-start gap-5">
         <motion.div 
-          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7E1A95]/10"
+          className="flex h-12 w-12 items-center justify-center rounded-xl"
           whileHover={shouldReduceMotion ? {} : { scale: 1.1, rotate: 5 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
@@ -452,7 +453,7 @@ function WhoItem({ icon, text }: { icon: React.ReactNode; text: string }) {
   const [title, description] = text.split(" – ")
   return (
     <li className="flex items-start gap-3">
-      <div className="mt-1">{icon}</div>
+      <div>{icon}</div>
       <span className="text-gray-800">
         <span className="font-bold">{title}</span>
         {description && ` – ${description}`}
