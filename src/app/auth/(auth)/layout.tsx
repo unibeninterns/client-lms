@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       />
       </div>
       {/* Blurred and dark overlay for the background */}
-      <main className="relative z-10 flex items-center justify-center px-4 py-8 h-screen">
+      <main className="relative z-10 flex items-center justify-center px-4 py-8 min-h-screen overflow-y-auto overscroll-contain md:h-screen md:overflow-y-visible md:overscroll-auto">
         <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden border border-white/50 bg-white/10 shadow-2xl">
           {/* Left hero */}
           <section
@@ -55,14 +55,14 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             <nav className="flex items-center justify-center gap-8 pt-8 text-sm">
               <Link
                 href="/auth/register"
-                className="relative text-muted-foreground hover:text-[#6d0d75] transition-colors data-[active=true]:text-purple-700 data-[active=true]:shadow-none data-[active=true]:underline underline-offset-8 decoration-2"
+                className="relative text-muted-foreground hover:text-[#800080] transition-colors data-[active=true]:text-[#800080] data-[active=true]:shadow-none data-[active=true]:underline underline-offset-8 decoration-2"
                 data-active={pathname === "/auth/register"}
               >
                 Register
               </Link>
               <Link
                 href="/auth/login"
-                className="relative text-muted-foreground hover:text-[#6d0d75] transition-colors data-[active=true]:text-purple-700 data-[active=true]:shadow-none data-[active=true]:underline underline-offset-8 decoration-2"
+                className="relative text-muted-foreground hover:text-[#800080] transition-colors data-[active=true]:text-[#800080] data-[active=true]:shadow-none data-[active=true]:underline underline-offset-8 decoration-2"
                 data-active={pathname === "/auth/login"}
               >
                 Login

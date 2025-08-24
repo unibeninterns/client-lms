@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
+    <div className="min-h-screen bg-[#FBEFFFB2]/70">
       <Header />
 
       <div className="bg-gradient-to-br from-gray-50 to-purple-50">
@@ -15,7 +15,7 @@ export default function PricingPage() {
       <section className="py-16 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-[#7E1A95] uppercase tracking-wide mb-2">
+            <p className="text-sm font-semibold text-[#800080] uppercase tracking-wide mb-2">
               PLANS & PRICING
             </p>
             <h1 className="text-3xl md:text-4xl font-bold text-[#1F1F1F]">
@@ -40,7 +40,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       12 modules (self-paced, 12 weeks)
@@ -48,7 +48,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Live sessions (2× weekly)
@@ -56,7 +56,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Resources & templates
@@ -64,7 +64,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Student forum access
@@ -72,7 +72,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Practice quizzes
@@ -83,7 +83,7 @@ export default function PricingPage() {
 
                 <button
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                 Get Started
                 </button>
             </div>
@@ -92,7 +92,7 @@ export default function PricingPage() {
             <div className="relative bg-gradient-to-br from-[#E8D5F2] to-[#D4B8E8] rounded-sm p-6 shadow-sm">
               {/* Recommended Badge */}
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <div className="bg-[#7E1A95] text-white px-4 py-1 rounded-full text-xs font-bold">
+                <div className="bg-[#800080] text-white px-4 py-1 rounded-full text-xs font-bold">
                   RECOMMENDED
                 </div>
               </div>
@@ -109,9 +109,12 @@ export default function PricingPage() {
                 <div className="text-4xl font-extrabold text-[#1F1F1F] mb-3">
                   ₦90,000
                 </div>
-                <div className="inline-block bg-[#F59E0B] text-white px-3 py-1 rounded-full text-xs font-bold">
-                  Save ₦10,000
-                </div>
+                <div 
+  className="inline-block px-3 py-1 text-sm font-bold text-black rounded-full" 
+  style={{ background: 'linear-gradient(45deg, #EFB832, #FEF092 50%, #EFB832)' }}
+>
+  Save ₦10,000
+</div>
               </div>
 
               <div className="mb-6">
@@ -121,7 +124,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Priority support
@@ -129,7 +132,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Graded assessments + final exam
@@ -137,7 +140,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Professional Diploma certificate (upon meeting criteria)
@@ -145,7 +148,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#7E1A95]" />
+                      <Check className="h-6 w-6 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Official transcript
@@ -156,7 +159,7 @@ export default function PricingPage() {
 
               <button 
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                 Get Started
               </button>
             </div>
@@ -236,7 +239,7 @@ export default function PricingPage() {
 
           </div>
             <div className="ml-6 mt-6 text-left">
-              <button className="text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors inline-flex items-center text-sm">
+              <button className="text-[#800080] font-semibold hover:text-[#690069] transition-colors inline-flex items-center text-sm">
                 View certification requirements
                 <ArrowRight className="ml-2 h-4 w-4" />
               </button>
@@ -301,7 +304,7 @@ export default function PricingPage() {
               
 
                 <div className="overflow-x-auto flex items-center py-4 pl-2 border-t border-[#EAEAEA] mt-0.5">
-                <div className="mr-16 sm:mr-60 md:mr-80 lg:mr-48">
+                <div className="mr-12 sm:mr-60 md:mr-80 lg:mr-48">
                   <div className="text-sm font-bold text-[#1F1F1F]">
                   Total Value
                   </div>
@@ -322,7 +325,10 @@ export default function PricingPage() {
                   <div className="text-sm font-bold text-[#1F1F1F]">
                     You Save
                   </div>
-                  <div className="inline-block bg-[#F59E0B] text-white px-3 py-1 rounded-full text-sm font-extrabold">
+                  <div 
+  className="inline-block px-3 py-1 text-sm font-extrabold text-black rounded-full" 
+  style={{ background: 'linear-gradient(45deg, #EFB832, #FEF092 50%, #EFB832)' }}
+>
                     ₦10,000
                   </div>
                   </div>
@@ -401,8 +407,8 @@ function FeatureRow({
       <td className="py-3 px-2 pr-4 text-sm text-gray-900">{feature}</td>
       <td className="text-center py-3 px-4">
         {basic ? (
-          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#7E1A95] bg-white">
-            <Check className="h-2.5 w-2.5 text-[#7E1A95]" />
+          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#800080] bg-white">
+            <Check className="h-2.5 w-2.5 text-[#800080]" />
           </div>
         ) : (
           <Minus className="h-4 w-4 text-gray-500 mx-auto" />
@@ -410,8 +416,8 @@ function FeatureRow({
       </td>
       <td className="text-center py-3 px-4">
         {premium ? (
-          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#7E1A95] bg-white">
-            <Check className="h-2.5 w-2.5 text-[#7E1A95]" />
+          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#800080] bg-white">
+            <Check className="h-2.5 w-2.5 text-[#800080]" />
           </div>
         ) : (
           <Minus className="h-4 w-4 text-gray-500 mx-auto" />
@@ -438,8 +444,8 @@ function PriceBreakdownRow({
       </td>
       <td className="text-center py-3 pl-3">
         {included && (
-          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#7E1A95] bg-white">
-            <Check className="h-2.5 w-2.5 text-[#7E1A95]" />
+          <div className="inline-flex items-center justify-center w-5 h-5 rounded-full border-2 border-[#800080] bg-white">
+            <Check className="h-2.5 w-2.5 text-[#800080]" />
           </div>
         )}
       </td>

@@ -28,11 +28,11 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/icon.png"
+              src="/iconn.png"
               width={50}
               height={50}
               alt="DRID logo"
-              className="h-14 w-16"
+              className="h-12 w-16"
             />
             <span className="sr-only">{"Directorate of Research, Innovation and Development"}</span>
           </div>
@@ -45,7 +45,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className={`text-sm font-medium transition-colors ${
-                        pathname === item.href ? "text-[#800080] hover:text-[#4a2952]" : "text-gray-900 hover:text-black"
+                        pathname === item.href ? "text-[#800080] hover:text-[#690069] bg-[#F9DBFF3D] rounded-full p-2" : "text-gray-900 hover:text-black"
                       }`}
                     >
                       {item.label}
@@ -64,7 +64,7 @@ export default function Header() {
               aria-label="User"
               className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             >
-              <User className="h-5 w-5 text-gray-700" />
+              <User className="h-5 w-5 text-gray-900" />
             </button>
           </div>
 

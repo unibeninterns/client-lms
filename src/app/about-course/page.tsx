@@ -13,7 +13,7 @@ export default function AboutCoursePage() {
   const shouldReduceMotion = useReducedMotion()
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
+    <div className="min-h-screen bg-[#FBEFFFB2]/70">
       <Header />
 
       {/* Hero section */}
@@ -66,7 +66,7 @@ export default function AboutCoursePage() {
       >
       <motion.a
           href="#curriculum"
-          className="inline-flex items-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
+          className="inline-flex items-center rounded-md bg-[#800080] hover:bg-[#690069] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
           whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
           whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
@@ -296,7 +296,7 @@ export default function AboutCoursePage() {
       
 
       {/* Certification & FAQ */}
-      <section className="py-10 md:py-14 lg:py-18">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Certification Criteria */}
@@ -314,7 +314,7 @@ export default function AboutCoursePage() {
               <p className="mt-8 text-gray-600">NB: Tuition for this program is ₦50,000 only.</p>
               <Link
                 href="/pricing"
-                className="inline-flex items-center mt-2 text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+                className="inline-flex items-center mt-2 text-[#800080] font-semibold hover:text-[#690069] transition-colors"
               >
                 View full pricing details
                 <ChevronRight className="ml-2 h-4 w-4" />
@@ -331,7 +331,7 @@ export default function AboutCoursePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-10 md:py-14 lg:py-18">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">Ready to take the next step?</h2>
           <p className="mt-3 text-gray-700 text-lg">Join other research professionals building the future.</p>
@@ -343,7 +343,7 @@ export default function AboutCoursePage() {
       >
       <motion.a
           href="/auth/register"
-          className="inline-flex items-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
+          className="inline-flex items-center rounded-md bg-[#800080] hover:bg-[#690069] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors"
           whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
           whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
@@ -373,7 +373,7 @@ function AnimatedFeatureCard({
   
   return (
     <motion.div 
-      className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#7E1A95]/20 transition-transform hover:scale-[1.02]"
+      className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#800080]/20 transition-transform hover:scale-[1.02]"
       variants={{
         initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
         whileInView: { opacity: 1, y: 0 }
@@ -411,7 +411,7 @@ function AnimatedModuleRow({
   
   return (
     <motion.div 
-      className="rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 p-5 shadow-sm ring-1 ring-black/5 transition-transform hover:scale-[1.02]"
+      className="rounded-2xl bg-[#FBEFFF40] p-5 shadow-sm ring-1 ring-black/5 transition-transform hover:scale-[1.02]"
       variants={{
         initial: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
         whileInView: { opacity: 1, y: 0 }
@@ -421,7 +421,7 @@ function AnimatedModuleRow({
     >
       <div className="flex items-start gap-4">
         <motion.div 
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#7E1A95] text-white font-bold"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#800080] text-white font-bold"
           whileHover={shouldReduceMotion ? {} : { scale: 1.1, rotate: 360 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
@@ -440,7 +440,7 @@ function GainItem({ text }: { text: string }) {
   const [title, description] = text.split(" – ")
   return (
     <li className="flex items-start gap-3">
-      <Check className="mt-1 h-6 w-6 text-[#7E1A95]" />
+      <Check className="mt-1 h-6 w-6 text-[#800080]" />
       <span className="text-gray-800">
         <span className="font-bold">{title}</span>
         {description && ` – ${description}`}
@@ -626,7 +626,7 @@ function LecturerCard({ lecturer, onClick }: { lecturer: Lecturer; onClick: () =
 
   return (
     <motion.div
-      className="flex-shrink-0 w-72 bg-[#F9F5FF] rounded-2xl shadow-sm ring-1 ring-[#7E1A95] cursor-pointer hover:shadow-md transition-shadow select-none overflow-hidden"
+      className="flex-shrink-0 w-72 bg-[#F9F5FF] rounded-2xl shadow-sm ring-1 ring-[#800080] cursor-pointer hover:shadow-md transition-shadow select-none overflow-hidden"
       onClick={onClick}
       whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -5 }}
       whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
@@ -718,7 +718,7 @@ function LecturerModal({ lecturer, onClose }: { lecturer: Lecturer; onClose: () 
 
             <Link
               href={lecturer.linkedin}
-              className="inline-flex items-center text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#690069] transition-colors"
             >
               View Profile on LinkedIn
               <ChevronRight className="ml-2 h-5 w-5" />
@@ -733,7 +733,7 @@ function LecturerModal({ lecturer, onClose }: { lecturer: Lecturer; onClose: () 
 function CriteriaItem({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-3">
-      <Check className="mt-1 h-6 w-6 text-[#7E1A95]" />
+      <Check className="mt-1 h-6 w-6 text-[#800080]" />
       <span className="text-gray-800 text-lg">{text}</span>
     </li>
   )

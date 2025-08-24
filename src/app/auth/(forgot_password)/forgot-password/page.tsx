@@ -66,7 +66,7 @@ export default function ForgotPasswordPage() {
               We&apos;ve sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.
             </p>
             <div className="mt-6">
-              <Link href="/auth/login" className="text-[#6d0d75] hover:underline">
+              <Link href="/auth/login" className="text-[#800080] hover:underline">
                 Return to Login
               </Link>
             </div>
@@ -80,7 +80,7 @@ export default function ForgotPasswordPage() {
     <section className="rounded-3xl border border-black/[0.04] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.15)]">
       <div className="px-6 sm:px-12 py-12">
         <div className="mx-auto max-w-xl text-center">
-          <div className="mx-auto mb-5 grid h-12 w-12 place-items-center rounded-full bg-[#6d0d75]/10 text-[#6d0d75]">
+          <div className="mx-auto mb-5 grid h-12 w-12 place-items-center rounded-full bg-[#800080]/10 text-[#800080]">
             <Lock className="h-6 w-6" />
           </div>
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">Reset Password</h1>
@@ -108,7 +108,7 @@ export default function ForgotPasswordPage() {
                   id="email"
                   type="email"
                   placeholder="Email Address"
-                  className="h-12 pl-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+                  className="h-12 pl-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#800080]"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -119,7 +119,7 @@ export default function ForgotPasswordPage() {
 
             <Button
               type="submit"
-              className="w-full h-12 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
+              className="w-full h-12 rounded-lg bg-[#800080] hover:bg-[#690069] disabled:bg-[#800080]/50 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -134,7 +134,7 @@ export default function ForgotPasswordPage() {
 
             <p className="text-sm text-muted-foreground">
               Remember your password?{" "}
-              <Link href="/auth/login" className="text-[#6d0d75] hover:underline">
+              <Link href="/auth/login" className="text-[#800080] hover:underline">
                 Login
               </Link>
             </p>

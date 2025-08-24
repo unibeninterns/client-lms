@@ -20,17 +20,28 @@ export default function Page() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [acceptTerms, setAcceptTerms] = useState(false)
-  const [formError, setFormError] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [termsError, setTermsError] = useState("")
+  const [generalError, setGeneralError] = useState("")
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const { register, isLoading, error, clearError } = useAuth()
   const router = useRouter()
 
-  // Clear form error when user starts typing
+  // Clear errors when user starts typing in the respective fields
   useEffect(() => {
     if (firstName || lastName || email || password) {
-      setFormError('');
+      setGeneralError('');
     }
   }, [firstName, lastName, email, password]);
+  
+  useEffect(() => {
+    setEmailError('');
+  }, [email]);
+  
+  useEffect(() => {
+    setPasswordError('');
+  }, [password]);
 
   // Clear auth error when component mounts or when user starts interacting
   useEffect(() => {
@@ -41,29 +52,42 @@ export default function Page() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setFormError("")
+    setGeneralError("")
+    setEmailError("")
+    setPasswordError("")
+    setTermsError("")
     clearError() // Clear any existing auth errors
     
     // Basic validation
     if (!firstName || !lastName || !email || !password) {
-      setFormError('All fields are required')
+      setGeneralError('All fields are required')
       return
     }
 
     if (!email.includes('@')) {
-      setFormError('Please enter a valid email address')
+      setEmailError('Please enter a valid email address')
       return
     }
 
-    if (password.length < 8) {
-      setFormError('Password must be at least 8 characters long')
-      return
-    }
+    // Password validation
+  const missing: string[] = []
+  if (password.length < 8) missing.push("at least 8 characters")
+  if (!/[A-Z]/.test(password)) missing.push("a capital letter")
+  if (!/[a-z]/.test(password)) missing.push("a small letter")
+  if (!/[0-9]/.test(password)) missing.push("a number")
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) missing.push("a special character")
+
+  if (missing.length > 0) {
+    setPasswordError(
+      `Password must contain ${missing.join(", ")}.`
+    )
+    return
+  }
 
     if (!acceptTerms) {
-      setFormError('Please accept the Terms of Service and Privacy Policy')
-      return
-    }
+  setTermsError('Please accept the Terms of Service and Privacy Policy')
+  return
+}
     
     try {
       await register({
@@ -76,20 +100,20 @@ export default function Page() {
       router.push('/auth/register/success')
     } catch (err: unknown) {
       console.error('Registration submission error:', err)
-      setFormError((err as Error).message || 'Registration failed. Please try again.')
+      setGeneralError((err as Error).message || 'Registration failed. Please try again.')
     }
   }
 
   const handleGoogleRegister = async () => {
     if (!GOOGLE_CLIENT_ID) {
-      setFormError('Google OAuth is not configured')
+      setGeneralError('Google OAuth is not configured')
       return
     }
     
     const GOOGLE_OAUTH_URL = `https://accounts.google.com/oauth/authorize?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(window.location.origin + '/auth/google/callback')}&response_type=code&scope=openid%20email%20profile`
 
     setIsGoogleLoading(true)
-    setFormError("")
+    setGeneralError("")
     clearError()
     
     try {
@@ -98,13 +122,12 @@ export default function Page() {
       window.location.href = registerUrl
     } catch (err: unknown) {
       console.error('Google register error:', err)
-      setFormError('Failed to initiate Google registration')
+      setGeneralError('Failed to initiate Google registration')
       setIsGoogleLoading(false)
     }
   }
 
-  // Don't clear fields on error - let user correct their input
-  const displayError = formError || error
+  const displayGeneralError = generalError || error
 
   return (
     <div className="w-full">
@@ -115,12 +138,12 @@ export default function Page() {
         }}
       />
 
-      {/* Error Display */}
-      {displayError && (
+      {/* General Error Display */}
+      {displayGeneralError && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl">
           <div className="flex items-center">
             <AlertCircle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
-            <p className="text-sm text-red-600">{displayError}</p>
+            <p className="text-sm text-red-600">{displayGeneralError}</p>
           </div>
         </div>
       )}
@@ -137,7 +160,7 @@ export default function Page() {
               id="reg-firstname"
               type="text"
               placeholder="First Name"
-              className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+              className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#800080]"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               aria-label="First Name"
@@ -158,7 +181,7 @@ export default function Page() {
               id="reg-lastname"
               type="text"
               placeholder="Last Name"
-              className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+              className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#800080]"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               aria-label="Last Name"
@@ -173,20 +196,23 @@ export default function Page() {
           <Label htmlFor="reg-email" className="sr-only">
             Email Address
           </Label>
-          <div className="relative">
+            <div className={`relative rounded-xl border-[1px] transition-colors ${emailError ? 'border-red-500 ring-[0.5px] ring-red-500' : 'border-transparent'}`}>
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               id="reg-email"
               type="email"
               placeholder="Email Address"
-              className="h-12 pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+              className="h-12 w-full pl-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-0"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               aria-label="Email Address"
               required
               disabled={isLoading || isGoogleLoading}
             />
-          </div>
+            </div>
+          {emailError && (
+            <p className="text-red-500 text-sm mt-1">{emailError}</p>
+          )}
         </div>
 
         {/* Password */}
@@ -194,57 +220,63 @@ export default function Page() {
           <Label htmlFor="reg-password" className="sr-only">
             Password
           </Label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              id="reg-password"
-              type={showPass ? "text" : "password"}
-              placeholder="Password"
-              className="h-12 pl-10 pr-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              aria-label="Password"
-              required
-              disabled={isLoading || isGoogleLoading}
-            />
-            <button
-              type="button"
-              aria-label={showPass ? "Hide password" : "Show password"}
-              onClick={() => setShowPass((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground disabled:opacity-50"
-              disabled={isLoading || isGoogleLoading}
-            >
-              {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            </button>
-          </div>
+            <div className={`relative rounded-xl border-[1px] transition-colors ${passwordError ? 'border-red-500 ring-[0.5px] ring-red-500' : 'border-transparent'}`}>
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="reg-password"
+                type={showPass ? "text" : "password"}
+                placeholder="Password"
+                className="h-12 w-full pl-10 pr-10 rounded-xl bg-gray-100 border-0 focus-visible:ring-0"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                aria-label="Password"
+                required
+                disabled={isLoading || isGoogleLoading}
+              />
+              <button
+                type="button"
+                aria-label={showPass ? "Hide password" : "Show password"}
+                onClick={() => setShowPass((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground disabled:opacity-50"
+                disabled={isLoading || isGoogleLoading}
+              >
+                {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+          {passwordError && (
+            <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+          )}
         </div>
 
         {/* Terms */}
         <div className="flex items-start gap-3 text-sm">
-          <Checkbox 
-            id="terms" 
-            className="mt-0.5 border-[#6d0d75] data-[state=checked]:bg-[#6d0d75]"
-            checked={acceptTerms}
-            onCheckedChange={(checked) => setAcceptTerms(!!checked)}
-            disabled={isLoading || isGoogleLoading}
-          />
-          <label htmlFor="terms" className="select-none text-muted-foreground">
-            I agree to the{" "}
-            <Link href="#" className="text-[#6d0d75] hover:underline">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="#" className="text-[#6d0d75] hover:underline">
-              Privacy Policy
-            </Link>
-            .
-          </label>
-        </div>
+  <Checkbox 
+    id="terms" 
+    className="mt-0.5 border-[#800080] data-[state=checked]:bg-[#800080]"
+    checked={acceptTerms}
+    onCheckedChange={(checked) => setAcceptTerms(!!checked)}
+    disabled={isLoading || isGoogleLoading}
+  />
+  <label htmlFor="terms" className="select-none text-muted-foreground">
+    I agree to the{" "}
+    <Link href="#" className="text-[#800080] hover:underline">
+      Terms of Service
+    </Link>{" "}
+    and{" "}
+    <Link href="#" className="text-[#800080] hover:underline">
+      Privacy Policy
+    </Link>
+    .
+  </label>
+</div>
+{termsError && (
+  <p className="text-red-500 text-sm mt-1">{termsError}</p>
+)}
 
         {/* Submit */}
         <Button
           type="submit"
-          className="w-full h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] text-white font-medium disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
+          className="w-full h-11 rounded-lg bg-[#800080] hover:bg-[#690069] text-white font-medium disabled:bg-[#800080]/50 disabled:cursor-not-allowed"
           disabled={isLoading || isGoogleLoading}
         >
           {isLoading ? (
@@ -290,7 +322,7 @@ export default function Page() {
         {/* Footer switch */}
         <p className="text-sm text-center text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-[#6d0d75] hover:underline">
+          <Link href="/auth/login" className="text-[#800080] hover:underline">
             Login
           </Link>
         </p>

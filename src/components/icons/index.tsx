@@ -8,12 +8,12 @@ export { Project } from './project';
 export { Duration } from './duration';
 export { Format } from './format';
 export { Sessions } from './sessions';
-export { Assessment } from './assessment';
+export { Assessment } from './assesment';
 export { Capstone } from './capstone';
 export { Certification } from './certification';
 export { Support } from './support';
 export { Fee } from './fee';
-
+export { Profile } from './profile';
 
 
 

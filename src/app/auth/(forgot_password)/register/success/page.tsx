@@ -59,13 +59,13 @@ export default function RegisterSuccessPage() {
             <div className="mt-6 space-y-3">
               <Link 
                 href="/auth/login" 
-                className="inline-block px-6 py-2 bg-[#6d0d75] hover:bg-[#5a0a63] text-white rounded-lg font-medium transition-colors"
+                className="inline-block px-6 py-2 bg-[#800080] hover:bg-[#690069] text-white rounded-lg font-medium transition-colors"
               >
                 Go to Login Now
               </Link>
               <p className="text-sm text-muted-foreground">
                 Didn&apos;t get an email?{" "}
-                <Link href="#" className="text-[#6d0d75] hover:underline">Resend Email</Link>
+                <Link href="#" className="text-[#800080] hover:underline">Resend Email</Link>
               </p>
             </div>
           </div>

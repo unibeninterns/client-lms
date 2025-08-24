@@ -47,7 +47,7 @@ export default function ResetSuccessPage() {
             </div>
             
             <div className="mt-6">
-              <Button asChild className="h-11 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63]">
+              <Button asChild className="h-11 rounded-lg bg-[#800080] hover:bg-[#690069]">
                 <Link href="/auth/login">Login Now</Link>
               </Button>
             </div>

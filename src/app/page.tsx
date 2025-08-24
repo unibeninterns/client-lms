@@ -38,7 +38,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
+    <div className="min-h-screen bg-[#FBEFFFB2]/70">
       <Header />
 
       {/* Hero */}
@@ -82,7 +82,7 @@ export default function Page() {
               >
                 <motion.a
                   href="auth/register"
-                  className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors shadow-lg"
+                  className="inline-flex items-center justify-center rounded-md bg-[#800080] hover:bg-[#690069] text-white font-semibold px-6 md:px-8 py-3 md:py-4 transition-colors shadow-lg"
                   {...buttonHover}
                 >
                   {"REGISTER NOW"}
@@ -121,7 +121,7 @@ export default function Page() {
 
       <div className="bg-[#FBEFFF]">
       {/* About the DRID Course */}
-      <section className="py-6 md:py-10 lg:py-12">
+      <section className="py-13 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center">
           <motion.div {...fadeInUp} viewport={{ once: true, margin: "10px" }}>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"About the DRID Course"}</h2>
@@ -177,7 +177,7 @@ export default function Page() {
       </section>
 
       {/* Course Modules Preview */}
-      <section className="py-8 md:py-10 lg:py-12">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center"
@@ -244,7 +244,7 @@ export default function Page() {
             >
               <motion.a
                 href="/about-course#curriculum"
-                className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
+                className="inline-flex items-center rounded-md border-2 border-[#800080] text-[#800080] px-6 py-3 font-semibold hover:bg-[#800080] hover:text-white transition-colors"
                 {...buttonHover}
               >
                 {"View Full Curriculum"}
@@ -256,7 +256,7 @@ export default function Page() {
       </section>
 
       {/* What learners are saying */}
-      <section className="py-8 md:py-10 lg:py-12">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
             className="text-center text-3xl md:text-4xl font-extrabold text-[#1F1F1F]"
@@ -285,7 +285,7 @@ export default function Page() {
           >
             <motion.a
               href="#more-testimonials"
-              className="inline-flex items-center text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#690069] transition-colors"
               whileHover={shouldReduceMotion ? {} : { x: 5 }}
               transition={{ duration: 0.2, ease: easeOut }}
             >
@@ -297,14 +297,14 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section className="pt-8 pb-6 md:pt-10 lg:pt-12">
+      <section className="py-16 md:py-20 lg:py-24">
         <motion.div 
           className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
           {...fadeInUp}
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div 
-            className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#7E1A95] text-white text-3xl font-bold"
+            className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#800080] text-white text-3xl font-bold"
             whileHover={shouldReduceMotion ? {} : { scale: 1.1, rotate: 360 }}
             transition={{ duration: 0.6, ease: easeOut }}
           >
@@ -321,7 +321,7 @@ export default function Page() {
           <div className="mt-6">
             <motion.a
               href="#faqs"
-              className="inline-flex items-center text-[#7E1A95] font-semibold hover:text-[#6F1584] transition-colors"
+              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#6F1584] transition-colors"
               whileHover={shouldReduceMotion ? {} : { x: 5 }}
               transition={{ duration: 0.2, ease: easeOut }}
             >
@@ -333,7 +333,7 @@ export default function Page() {
       </section>
 
       {/* Final CTA */}
-      <section id="register" className="py-8 md:py-10 lg:py-12">
+      <section id="register" className="py-16 md:py-20 lg:py-24">
         <motion.div 
           className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
           {...fadeInUp}
@@ -357,7 +357,7 @@ export default function Page() {
             <motion.div variants={staggerItem}>
               <motion.a
                 href="auth/register"
-                className="inline-flex items-center justify-center rounded-md bg-[#7E1A95] hover:bg-[#6F1584] text-white font-semibold px-8 py-4 transition-colors shadow-lg"
+                className="inline-flex items-center justify-center rounded-md bg-[#800080] hover:bg-[#690069] text-white font-semibold px-8 py-4 transition-colors shadow-lg"
                 {...buttonHover}
               >
                 {"REGISTER NOW"}
@@ -368,7 +368,7 @@ export default function Page() {
               <p className="mb-3">{"Not sure yet?"}</p>
               <motion.a
                 href="/about-course#curriculum"
-                className="inline-flex items-center rounded-md border-2 border-[#7E1A95] text-[#7E1A95] px-6 py-3 font-semibold hover:bg-[#7E1A95] hover:text-white transition-colors"
+                className="inline-flex items-center rounded-md border-2 border-[#800080] text-[#800080] px-6 py-3 font-semibold hover:bg-[#800080] hover:text-white transition-colors"
                 {...buttonHover}
               >
                 {"View Full Curriculum"}
@@ -414,7 +414,7 @@ function ModuleCard({
     >
       <div className="flex items-start gap-4">
         <motion.div 
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#7E1A95] text-white font-bold"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#800080] text-white font-bold"
           whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
           transition={{ duration: 0.2, ease: easeOut }}
         >
@@ -449,7 +449,7 @@ function TestimonialCard({ name }: { name: string }) {
       variants={staggerItem}
       {...hoverEffect}
     >
-      <Quote className="h-6 w-6 text-[#7E1A95] mb-4" />
+      <Quote className="h-6 w-6 text-[#800080] mb-4" />
       <p className="text-gray-700 leading-relaxed">
         {"Lorem ipsum dolor sit amet consectetur. Faucibus lectus lacus nunc eget pretium ipsum cras interdum turpis."}
       </p>

@@ -100,7 +100,7 @@ function ResetPasswordFormComponent() {
                     id="new-password"
                     type={showNewPassword ? "text" : "password"}
                     placeholder="New Password"
-                    className="h-12 pl-12 pr-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+                    className="h-12 pl-12 pr-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#800080]"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
@@ -125,7 +125,7 @@ function ResetPasswordFormComponent() {
                     id="confirm-password"
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm Password"
-                    className="h-12 pl-12 pr-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#6d0d75]"
+                    className="h-12 pl-12 pr-12 rounded-xl bg-gray-100 border-0 focus-visible:ring-2 focus-visible:ring-[#800080]"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
@@ -146,7 +146,7 @@ function ResetPasswordFormComponent() {
 
             <Button
               type="submit"
-              className="w-full h-12 rounded-lg bg-[#6d0d75] hover:bg-[#5a0a63] disabled:bg-[#6d0d75]/50 disabled:cursor-not-allowed"
+              className="w-full h-12 rounded-lg bg-[#800080] hover:bg-[#690069] disabled:bg-[#800080]/50 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? (
