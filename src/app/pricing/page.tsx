@@ -30,7 +30,7 @@ export default function PricingPage() {
           <div className="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto justify-center items-center">
             {/* Basic Plan */}
             <motion.div 
-              className="relative flex flex-col h-[691px] w-[400px] bg-white border border-[#EAEAEA] items-center py-4 px-2 shadow-sm"
+              className="relative flex flex-col h-[600px] w-[335px] xs:h-[691px] xs:w-[400px] bg-white border border-[#EAEAEA] items-center py-4 px-2 shadow-sm"
               whileHover={shouldReduceMotion ? {} : { 
                 y: -8,
                 boxShadow: "0 10px 40px rgba(128, 0, 128, 0.15)"
@@ -94,7 +94,7 @@ export default function PricingPage() {
 
               <motion.button
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-16 rounded-[5px] transition-colors text-lg absolute bottom-20"
+                className="w-[200px] xs:w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-10 xs:px-16 rounded-[4px] xs:rounded-[5px] transition-colors text-sm xs:text-lg absolute bottom-14 xs:bottom-20"
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                 whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 transition={{ duration: 0.2 }}
@@ -105,7 +105,7 @@ export default function PricingPage() {
 
             {/* Premium Plan */}
             <motion.div 
-              className="relative flex flex-col h-[691px] w-[400px] items-center py-4 px-2 shadow-sm"
+              className="relative flex flex-col h-[610px] w-[335px] xs:h-[691px] xs:w-[400px] items-center py-4 px-2 shadow-sm"
               style={{
                 background: 'linear-gradient(20deg, rgba(159, 63, 159, 0.8), rgba(251, 239, 255, 0.9) 28%, rgba(251, 239, 255, 1) 68%, rgba(159, 63, 159, 0.8))'
               }}
@@ -139,7 +139,7 @@ export default function PricingPage() {
                 <h2 className="text-2xl font-bold text-[#1F1F1F] mb-1 self-start pl-4 pt-6">
                   Premium
                 </h2>
-              <div className="flex flex-col items-center m-4 px-2 py-4">
+              <div className="flex flex-col items-center mx-4 xs:m-4 px-2 py-4">
                 <div className="flex items-center justify-center gap-2 mb-1">
                   <span className="text-sm text-gray-600 line-through">
                     ₦100,000
@@ -158,7 +158,7 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-start w-full px-2 py-4 m-4 flex-grow">
+              <div className="flex flex-col items-start w-full px-2 py-4 mx-4 xs:m-4 flex-grow">
                 <h3 className="text-lg font-bold text-[#1F1F1F] mb-3">
                   Everything in Basic plus...
                 </h3>
@@ -200,7 +200,7 @@ export default function PricingPage() {
 
               <motion.button 
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-16 rounded-[5px] transition-colors text-lg absolute bottom-20"
+                className="w-[200px] xs:w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-10 xs:px-16 rounded-[4px] xs:rounded-[5px] transition-colors text-sm xs:text-lg absolute bottom-14 xs:bottom-20"
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                 whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 transition={{ duration: 0.2 }}
@@ -355,7 +355,7 @@ export default function PricingPage() {
               
 
                 <div className="overflow-x-auto flex items-center py-4 pl-2 border-t border-[#EAEAEA] mt-0.5">
-                <div className="mr-12 sm:mr-60 md:mr-80 lg:mr-48">
+                <div className="mr-12 xs:mr-30 sm:mr-60 md:mr-80 lg:mr-48">
                   <div className="text-sm font-bold text-[#1F1F1F]">
                   Total Value
                   </div>
