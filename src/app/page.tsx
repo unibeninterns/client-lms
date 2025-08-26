@@ -121,7 +121,7 @@ export default function Page() {
 
       <div className="bg-[#FBEFFF]">
       {/* About the DRID Course */}
-      <section className="py-13 md:py-16 lg:py-20">
+      <section className="py-11 md:py-11 lg:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center">
           <motion.div {...fadeInUp} viewport={{ once: true, margin: "10px" }}>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F]">{"About the DRID Course"}</h2>
@@ -285,7 +285,7 @@ export default function Page() {
           >
             <motion.a
               href="#more-testimonials"
-              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#690069] transition-colors"
+              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#690069] transition-colors hover:bg-[#ebc8f33d] rounded-full p-2"
               whileHover={shouldReduceMotion ? {} : { x: 5 }}
               transition={{ duration: 0.2, ease: easeOut }}
             >
@@ -321,7 +321,7 @@ export default function Page() {
           <div className="mt-6">
             <motion.a
               href="#faqs"
-              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#6F1584] transition-colors"
+              className="inline-flex items-center text-[#800080] font-semibold hover:text-[#6F1584] transition-colors hover:bg-[#ebc8f33d] rounded-full p-2"
               whileHover={shouldReduceMotion ? {} : { x: 5 }}
               transition={{ duration: 0.2, ease: easeOut }}
             >

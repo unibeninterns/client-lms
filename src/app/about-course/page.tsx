@@ -257,6 +257,7 @@ export default function AboutCoursePage() {
       {/* What you'll gain & Who should enroll */}
       <section className="bg-white py-8 md:py-10 lg:py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div>
           <h3 className="text-3xl md:text-4xl font-extrabold text-center text-[#1F1F1F]">
             What You’ll Gain
           </h3>
@@ -268,7 +269,9 @@ export default function AboutCoursePage() {
             <GainItem text="Capstone Project – Create a real-world research project to showcase in your portfolio." />
             <GainItem text="Verified Certification – Earn a professional digital diploma from DRID, University of Benin." />
           </ul>
+          </div>
 
+          <div className="pt-16 md:pt-20 lg:pt-24">
           <h3 className="mt-14 text-3xl md:text-4xl font-extrabold text-center text-[#1F1F1F]">
             Who Should Enroll
           </h3>
@@ -279,6 +282,7 @@ export default function AboutCoursePage() {
             <WhoItem icon={<Bag/>} text="NGO researchers and data officers – working on evidence-based programs." />
             <WhoItem icon={<Bulb/>} text="Innovation and grant-focused professionals – involved in proposal writing and research-driven projects." />
           </ul>
+          </div>
         </div>
       </section>
 
@@ -301,7 +305,7 @@ export default function AboutCoursePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Certification Criteria */}
             <div>
-              <div className="rounded-2xl p-8 ring-1 ring-fuchsia-200 shadow-lg">
+              <div id="certification-requirements" className="rounded-2xl p-8 ring-1 ring-fuchsia-200 shadow-lg">
               <h3 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Certification Criteria</h3>
                 <ul className="space-y-4">
                   <CriteriaItem text="Complete all weekly modules" />
@@ -323,7 +327,7 @@ export default function AboutCoursePage() {
 
             {/* FAQ */}
             <div id="faq" className="rounded-2xl ring-1 ring-fuchsia-200 shadow-lg p-8">
-              <h3 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Frequently Asked Questions</h3>
+              <h3 className="text-lg sm:text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Frequently Asked Questions</h3>
               <FAQSection />
             </div>
           </div>
@@ -440,7 +444,7 @@ function GainItem({ text }: { text: string }) {
   const [title, description] = text.split(" – ")
   return (
     <li className="flex items-start gap-3">
-      <Check className="mt-1 h-6 w-6 text-[#800080]" />
+      <Check className="mt-1 h-6 w-6 flex-shrink-0 text-[#800080]" />
       <span className="text-gray-800">
         <span className="font-bold">{title}</span>
         {description && ` – ${description}`}
@@ -733,7 +737,7 @@ function LecturerModal({ lecturer, onClose }: { lecturer: Lecturer; onClose: () 
 function CriteriaItem({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-3">
-      <Check className="mt-1 h-6 w-6 text-[#800080]" />
+      <Check className="mt-1 h-6 w-6 flex-shrink-0 text-[#800080]" />
       <span className="text-gray-800 text-lg">{text}</span>
     </li>
   )
@@ -778,7 +782,7 @@ function FAQSection() {
           }`}
         >
           <button
-            className="w-full px-6 py-4 text-left flex items-center justify-between"
+            className="bg-white w-full px-6 py-4 text-left flex items-center justify-between hover:bg-[#F9F9F9] rounded-2xl transition-colors"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
             <span className="font-semibold text-gray-900">{faq.question}</span>
@@ -788,7 +792,7 @@ function FAQSection() {
           </button>
           {openIndex === index && (
             <div className="px-6 pb-4">
-              <p className="text-gray-700">{faq.answer}</p>
+              <p className="text-sm sm:text-base text-gray-700">{faq.answer}</p>
             </div>
           )}
         </div>

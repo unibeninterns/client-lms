@@ -18,10 +18,10 @@ export default function Footer() {
         />
         <div className="absolute inset-0 bg-[#3B244F]/20 z-10" />
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 mt-24">
-          <h2 className="text-6xl md:text-8xl font-extrabold tracking-wide drop-shadow-lg">
+          <h2 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-wide drop-shadow-lg">
             Learning never stops.
           </h2>
-          <p className="mt-6 text-4xl font-medium md:text-6xl drop-shadow-lg">
+          <p className="mt-6 text-2xl sm:text-4xl font-medium md:text-6xl drop-shadow-lg">
             Join the next DRID cohort.
           </p>
         </div>
@@ -79,38 +79,88 @@ export default function Footer() {
             <div>
               <h3 className="text-xl font-extrabold mb-6">DRID</h3>
               <ul className="space-y-4 text-white/85">
-                <li><Link href="/about-course" className="hover:text-white">About DRID</Link></li>
-                <li><Link href="/about-course#learning-experience" className="hover:text-white">Mission &amp; Vision</Link></li>
-              </ul>
+  <li>
+    <Link href="/about-course" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      About DRID
+    </Link>
+  </li>
+  <li>
+    <Link href="/about-course#learning-experience" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Mission &amp; Vision
+    </Link>
+  </li>
+</ul>
             </div>
             {/* Conditional ordering for mobile view */}
             <div className="sm:order-none order-2 -mt-48 sm:mt-0">
               <h3 className="text-xl font-extrabold mb-6">Courses</h3>
               <ul className="space-y-4 text-white/85">
-                <li><Link href="/about-course#features" className="hover:text-white">Course Overview</Link></li>
-                <li><Link href="/about-course#curriculum" className="hover:text-white">Curriculum</Link></li>
-                <li><Link href="/about-course#lecturers" className="hover:text-white">Faculty</Link></li>
-                <li><Link href="/about-course#faq" className="hover:text-white">FAQ</Link></li>
-              </ul>
+  <li>
+    <Link href="/about-course#features" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Course Overview
+    </Link>
+  </li>
+  <li>
+    <Link href="/about-course#curriculum" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Curriculum
+    </Link>
+  </li>
+  <li>
+    <Link href="/about-course#lecturers" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Faculty
+    </Link>
+  </li>
+  <li>
+    <Link href="/about-course#faq" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      FAQ
+    </Link>
+  </li>
+</ul>
             </div>
             <div className="sm:order-none order-1">
               <h3 className="text-xl font-extrabold mb-6">Resources</h3>
               <ul className="space-y-4 text-white/85">
-                <li><Link href="/reviews" className="hover:text-white">Reviews</Link></li>
-                <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
-                <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-white">Terms of Use</Link></li>
-                <li><Link href="/help" className="hover:text-white">Help Center</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-                <li><Link
-                  href="https://linkedin.com/company/drid-uniben"
-                  aria-label="LinkedIn"
-                  className="lg:hidden inline-flex items-center gap-2 text-white/85 hover:text-white"
-                >
-                  <span>LinkedIn</span>
-                  <Linkedin className="h-5 w-5" />
-                </Link></li>
-              </ul>
+  <li>
+    <Link href="/reviews" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Reviews
+    </Link>
+  </li>
+  <li>
+    <Link href="/pricing" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Pricing
+    </Link>
+  </li>
+  <li>
+    <Link href="/privacy" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Privacy Policy
+    </Link>
+  </li>
+  <li>
+    <Link href="/terms" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Terms of Use
+    </Link>
+  </li>
+                <li>
+    <Link href="/help" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Help Center
+    </Link>
+  </li>
+  <li>
+    <Link href="/contact" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
+      Contact
+    </Link>
+  </li>
+  <li>
+    <Link
+      href="https://linkedin.com/company/drid-uniben"
+      aria-label="LinkedIn"
+      className="lg:hidden inline-flex items-center gap-2 text-white/85 hover:underline hover:decoration-white/75 hover:underline-offset-4"
+    >
+      <span>LinkedIn</span>
+      <Linkedin className="h-5 w-5" />
+    </Link>
+  </li>
+</ul>
             </div>
           </div>
         </div>
@@ -121,13 +171,13 @@ export default function Footer() {
             Copyright © {year} Directorate of Research, Innovation &amp; Development (DRID), University of Benin. All rights reserved.
           </p>
           <Link
-            href="https://linkedin.com/company/drid-uniben"
-            aria-label="LinkedIn"
-            className="inline-flex items-center gap-2 text-white/85 hover:text-white"
-          >
-            <span className="hidden lg:inline">LinkedIn</span>
-            <Linkedin className="hidden lg:inline h-5 w-5" />
-          </Link>
+  href="https://linkedin.com/company/drid-uniben"
+  aria-label="LinkedIn"
+  className="inline-flex items-center gap-2 text-white/85 hover:underline hover:decoration-white/75 hover:underline-offset-4"
+>
+  <span className="hidden lg:inline">LinkedIn</span>
+  <Linkedin className="hidden lg:inline h-5 w-5" />
+</Link>
         </div>
       </div>
     </footer>

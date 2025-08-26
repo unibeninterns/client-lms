@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       />
       </div>
       {/* Blurred and dark overlay for the background */}
-      <main className="relative z-10 flex items-center justify-center px-4 py-8 min-h-screen overflow-y-auto overscroll-contain md:h-screen md:overflow-y-visible md:overscroll-auto">
+      <main className="relative z-10 flex items-center justify-center px-4 py-8 min-h-screen overflow-y-auto overscroll-contain">
         <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden border border-white/50 bg-white/10 shadow-2xl">
           {/* Left hero */}
           <section

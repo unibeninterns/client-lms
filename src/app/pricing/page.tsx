@@ -4,8 +4,11 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Check, Minus, ChevronDown, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { easeOut, motion, useReducedMotion } from "framer-motion";
 
 export default function PricingPage() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="min-h-screen bg-[#FBEFFFB2]/70">
       <Header />
@@ -25,7 +28,7 @@ export default function PricingPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {/* Basic Plan */}
-            <div className="bg-white rounded-sm p-6 shadow-sm border border-[#EAEAEA]">
+            <div className="bg-white p-6 shadow-sm border border-[#EAEAEA]">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-[#1F1F1F] mb-3">Basic</h2>
                 <div className="text-4xl font-extrabold text-[#1F1F1F] mb-4">
@@ -40,7 +43,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       12 modules (self-paced, 12 weeks)
@@ -48,7 +51,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Live sessions (2× weekly)
@@ -56,7 +59,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Resources & templates
@@ -64,7 +67,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Student forum access
@@ -72,7 +75,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Practice quizzes
@@ -83,13 +86,13 @@ export default function PricingPage() {
 
                 <button
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-[5px] transition-colors text-sm">
                 Get Started
                 </button>
             </div>
 
             {/* Premium Plan */}
-            <div className="relative bg-gradient-to-br from-[#E8D5F2] to-[#D4B8E8] rounded-sm p-6 shadow-sm">
+            <div className="relative bg-gradient-to-br from-[#E8D5F2] to-[#D4B8E8] p-6 shadow-sm">
               {/* Recommended Badge */}
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <div className="bg-[#800080] text-white px-4 py-1 rounded-full text-xs font-bold">
@@ -111,7 +114,9 @@ export default function PricingPage() {
                 </div>
                 <div 
   className="inline-block px-3 py-1 text-sm font-bold text-black rounded-full" 
-  style={{ background: 'linear-gradient(45deg, #EFB832, #FEF092 50%, #EFB832)' }}
+  style={{ 
+    background: 'linear-gradient(45deg, #EFB832 20%, #FEF092 50%, #EFB832 80%)' 
+  }}
 >
   Save ₦10,000
 </div>
@@ -124,7 +129,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Priority support
@@ -132,7 +137,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Graded assessments + final exam
@@ -140,7 +145,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Professional Diploma certificate (upon meeting criteria)
@@ -148,7 +153,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 text-[#800080]" />
+                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Official transcript
@@ -159,7 +164,7 @@ export default function PricingPage() {
 
               <button 
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-[5px] transition-colors text-sm">
                 Get Started
               </button>
             </div>
@@ -176,16 +181,16 @@ export default function PricingPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-sm py-0 shadow-sm border border-[#EAEAEA]">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full sm:table-fixed">
                 <thead>
                   <tr className="border-b border-[#EAEAEA] bg-[#F9F9F9]">
-                    <th className="text-left py-4 pr-4 pl-4 text-sm font-bold text-[#1F1F1F]">
+                    <th className="sm:w-2/5 text-left py-4 pr-4 pl-4 text-sm font-bold text-[#1F1F1F]">
                       Features
                     </th>
-                    <th className="text-center py-4 px-4 text-sm font-bold text-[#1F1F1F]">
+                    <th className="sm:w-1/5 text-center py-4 px-4 text-sm font-bold text-[#1F1F1F]">
                       Basic
                     </th>
-                    <th className="text-center py-4 px-4 text-sm font-bold text-[#1F1F1F]">
+                    <th className="sm:w-2/5 text-center py-4 px-4 text-sm font-bold text-[#1F1F1F]">
                       Premium
                     </th>
                   </tr>
@@ -236,14 +241,20 @@ export default function PricingPage() {
                 </tbody>
               </table>
             </div>
-
           </div>
-            <div className="ml-6 mt-6 text-left">
-              <button className="text-[#800080] font-semibold hover:text-[#690069] transition-colors inline-flex items-center text-sm">
-                View certification requirements
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
+            <motion.div 
+            className="ml-6 mt-6 text-left"
+          >
+            <motion.a
+              href="about-course#certification-requirements"
+              className="text-[#800080] font-semibold hover:text-[#690069] transition-colors inline-flex items-center text-sm hover:bg-[#F9DBFF3D] rounded-full p-2"
+              whileHover={shouldReduceMotion ? {} : { x: 5 }}
+              transition={{ duration: 0.2, ease: easeOut }}
+            >
+              {"View certification requirements"}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
@@ -327,7 +338,9 @@ export default function PricingPage() {
                   </div>
                   <div 
   className="inline-block px-3 py-1 text-sm font-extrabold text-black rounded-full" 
-  style={{ background: 'linear-gradient(45deg, #EFB832, #FEF092 50%, #EFB832)' }}
+  style={{ 
+    background: 'linear-gradient(45deg, #EFB832 20%, #FEF092 50%, #EFB832 80%)' 
+  }}
 >
                     ₦10,000
                   </div>

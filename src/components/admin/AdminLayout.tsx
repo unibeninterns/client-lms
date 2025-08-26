@@ -2,12 +2,12 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useAuth, withAdminAuth } from "@/contexts/AuthContext"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAuth, withAdminAuth } from "@/contexts/AuthContext";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard,
   BookOpen,
@@ -18,7 +18,8 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
+} from "lucide-react";
+import Image from "next/image";
 
 const navigationItems = [
   {
@@ -130,14 +131,16 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
       >
         {/* Mobile Header */}
         <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
-              <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center">
-                <div className="w-4 h-4 bg-purple-600 rounded-xs"></div>
-              </div>
+          <div className="flex items-center gap-4">
+              <Image
+                src="/iconn.png"
+                width={56}
+                height={56}
+                alt="DRID logo"
+                className="h-10 w-12"
+              />
+              <span className="text-xl text-[#800080] md:text-3xl font-extrabold pt-4 tracking-wide">DRID</span>
             </div>
-            <span className="text-xl font-bold text-purple-600">DRID</span>
-          </div>
           <Button 
             variant="ghost" 
             size="sm" 
@@ -152,8 +155,8 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         {user && (
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 font-semibold text-sm">
+              <div className="w-10 h-10 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
+                <span className="text-[#800080] font-semibold text-sm">
                   {user.first_name?.charAt(0) || user.email?.charAt(0) || 'A'}
                 </span>
               </div>
@@ -183,7 +186,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={cn(
                     "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive ? "bg-purple-50 text-purple-600" : "text-gray-700 hover:bg-gray-100"
+                    isActive ? "bg-[#F9DBFF3D] text-[#800080]" : "text-gray-700 hover:bg-gray-100"
                   )}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -203,7 +206,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={cn(
                     "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive ? "bg-purple-50 text-purple-600" : "text-gray-700 hover:bg-gray-100"
+                    isActive ? "bg-[#F9DBFF3D] text-[#800080]" : "text-gray-700 hover:bg-gray-100"
                   )}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -238,13 +241,15 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         {/* Desktop Header with Logo and Toggle */}
         <div className="p-4 border-b border-gray-200 flex items-center justify-between">
           {!isCollapsed && (
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center">
-                  <div className="w-4 h-4 bg-purple-600 rounded-xs"></div>
-                </div>
-              </div>
-              <span className="text-xl font-bold text-purple-600">DRID</span>
+            <div className="flex items-center gap-4">
+              <Image
+                src="/iconn.png"
+                width={56}
+                height={56}
+                alt="DRID logo"
+                className="h-10 w-12"
+              />
+              <span className="text-xl text-[#800080] md:text-3xl font-extrabold pt-4 tracking-wide">DRID</span>
             </div>
           )}
           <Button variant="ghost" size="sm" onClick={() => setIsCollapsed(!isCollapsed)} className="p-1 h-8 w-8">
@@ -256,8 +261,8 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         {!isCollapsed && user && (
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 font-semibold text-sm">
+              <div className="w-10 h-10 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
+                <span className="text-[#800080] font-semibold text-sm">
                   {user.first_name?.charAt(0) || user.email?.charAt(0) || 'A'}
                 </span>
               </div>
@@ -287,7 +292,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={cn(
                     "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive ? "bg-purple-50 text-purple-600" : "text-gray-700 hover:bg-gray-100",
+                    isActive ? "bg-[#F9DBFF3D] text-[#800080]" : "text-gray-700 hover:bg-gray-100",
                     isCollapsed && "justify-center"
                   )}
                   title={isCollapsed ? item.name : undefined}
@@ -308,7 +313,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={cn(
                     "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive ? "bg-purple-50 text-purple-600" : "text-gray-700 hover:bg-gray-100",
+                    isActive ? "bg-[#F9DBFF3D] text-[#800080]" : "text-gray-700 hover:bg-gray-100",
                     isCollapsed && "justify-center"
                   )}
                   title={isCollapsed ? item.name : undefined}
@@ -343,7 +348,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
           <button
             id="mobile-menu-button"
             type="button"
-            className="text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 p-2 -ml-2"
+            className="text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#800080] p-2 -ml-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -351,18 +356,20 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-purple-600 rounded flex items-center justify-center">
-              <div className="w-4 h-4 bg-white rounded-sm flex items-center justify-center">
-                <div className="w-2 h-2 bg-purple-600 rounded-xs"></div>
-              </div>
+          <div className="flex items-center gap-4">
+              <Image
+                src="/iconn.png"
+                width={56}
+                height={56}
+                alt="DRID logo"
+                className="h-10 w-12"
+              />
+              <span className="text-xl text-[#800080] md:text-3xl font-extrabold pt-4 tracking-wide">DRID</span>
             </div>
-            <span className="text-lg font-bold text-purple-600">DRID</span>
-          </div>
           <div className="w-10 h-8 flex items-center justify-end">
             {user && (
-              <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 font-semibold text-xs">
+              <div className="w-8 h-8 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
+                <span className="text-[#800080] font-semibold text-xs">
                   {user.first_name?.charAt(0) || user.email?.charAt(0) || 'A'}
                 </span>
               </div>
