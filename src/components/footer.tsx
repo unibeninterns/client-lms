@@ -79,88 +79,88 @@ export default function Footer() {
             <div>
               <h3 className="text-xl font-extrabold mb-6">DRID</h3>
               <ul className="space-y-4 text-white/85">
-  <li>
-    <Link href="/about-course" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      About DRID
-    </Link>
-  </li>
-  <li>
-    <Link href="/about-course#learning-experience" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Mission &amp; Vision
-    </Link>
-  </li>
-</ul>
+                <li>
+                  <Link href="/about-course" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    About DRID
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about-course#learning-experience" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Mission &amp; Vision
+                  </Link>
+                </li>
+              </ul>
             </div>
             {/* Conditional ordering for mobile view */}
             <div className="sm:order-none order-2 -mt-48 sm:mt-0">
               <h3 className="text-xl font-extrabold mb-6">Courses</h3>
               <ul className="space-y-4 text-white/85">
-  <li>
-    <Link href="/about-course#features" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Course Overview
-    </Link>
-  </li>
-  <li>
-    <Link href="/about-course#curriculum" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Curriculum
-    </Link>
-  </li>
-  <li>
-    <Link href="/about-course#lecturers" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Faculty
-    </Link>
-  </li>
-  <li>
-    <Link href="/about-course#faq" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      FAQ
-    </Link>
-  </li>
-</ul>
+                <li>
+                  <Link href="/about-course#features" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Course Overview
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about-course#curriculum" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Curriculum
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about-course#lecturers" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Faculty
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about-course#faq" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    FAQ
+                  </Link>
+                </li>
+              </ul>
             </div>
             <div className="sm:order-none order-1">
               <h3 className="text-xl font-extrabold mb-6">Resources</h3>
               <ul className="space-y-4 text-white/85">
-  <li>
-    <Link href="/reviews" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Reviews
-    </Link>
-  </li>
-  <li>
-    <Link href="/pricing" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Pricing
-    </Link>
-  </li>
-  <li>
-    <Link href="/privacy" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Privacy Policy
-    </Link>
-  </li>
-  <li>
-    <Link href="/terms" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Terms of Use
-    </Link>
-  </li>
                 <li>
-    <Link href="/help" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Help Center
-    </Link>
-  </li>
-  <li>
-    <Link href="/contact" className="hover:underline hover:decoration-white/75 hover:underline-offset-4">
-      Contact
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="https://linkedin.com/company/drid-uniben"
-      aria-label="LinkedIn"
-      className="lg:hidden inline-flex items-center gap-2 text-white/85 hover:underline hover:decoration-white/75 hover:underline-offset-4"
-    >
-      <span>LinkedIn</span>
-      <Linkedin className="h-5 w-5" />
-    </Link>
-  </li>
-</ul>
+                  <Link href="/reviews" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Reviews
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Terms of Use
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/help" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://www.linkedin.com/company/directorate-of-research-innovation-and-development-uniben/"
+                    aria-label="LinkedIn"
+                    className="lg:hidden inline-flex items-center gap-2 text-white/85 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100"
+                  >
+                    <span>LinkedIn</span>
+                    <Linkedin className="h-5 w-5" />
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -171,13 +171,13 @@ export default function Footer() {
             Copyright © {year} Directorate of Research, Innovation &amp; Development (DRID), University of Benin. All rights reserved.
           </p>
           <Link
-  href="https://linkedin.com/company/drid-uniben"
-  aria-label="LinkedIn"
-  className="inline-flex items-center gap-2 text-white/85 hover:underline hover:decoration-white/75 hover:underline-offset-4"
->
-  <span className="hidden lg:inline">LinkedIn</span>
-  <Linkedin className="hidden lg:inline h-5 w-5" />
-</Link>
+            href="https://www.linkedin.com/company/directorate-of-research-innovation-and-development-uniben/"
+            aria-label="LinkedIn"
+            className="inline-flex items-center gap-2 text-white/85 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white/75 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100"
+          >
+            <span className="hidden lg:inline">LinkedIn</span>
+            <Linkedin className="hidden lg:inline h-5 w-5" />
+          </Link>
         </div>
       </div>
     </footer>

@@ -14,6 +14,9 @@ export { Certification } from './certification';
 export { Support } from './support';
 export { Fee } from './fee';
 export { Profile } from './profile';
-
+export { Star1 } from './star1';
+export { Star2 } from './star2';    
+export { Star3 } from './star3';
+export { Star4 } from './star4';
 
 

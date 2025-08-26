@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import { Check, Minus, ChevronDown, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { easeOut, motion, useReducedMotion } from "framer-motion";
+import { Star1, Star2, Star3, Star4 } from "@/components/icons";
 
 export default function PricingPage() {
   const shouldReduceMotion = useReducedMotion();
@@ -26,24 +27,31 @@ export default function PricingPage() {
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto justify-center items-center">
             {/* Basic Plan */}
-            <div className="bg-white p-6 shadow-sm border border-[#EAEAEA]">
-              <div className="text-center mb-6">
+            <motion.div 
+              className="relative flex flex-col h-[691px] w-[400px] bg-white border border-[#EAEAEA] items-center py-4 px-2 shadow-sm"
+              whileHover={shouldReduceMotion ? {} : { 
+                y: -8,
+                boxShadow: "0 10px 40px rgba(128, 0, 128, 0.15)"
+              }}
+              transition={{ duration: 0.3, ease: easeOut }}
+            >
+              <div className="flex flex-col items-center m-4 px-2 py-4">
                 <h2 className="text-2xl font-bold text-[#1F1F1F] mb-3">Basic</h2>
-                <div className="text-4xl font-extrabold text-[#1F1F1F] mb-4">
+                <div className="text-4xl font-extrabold text-[#1F1F1F]">
                   ₦50,000
                 </div>
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col items-start w-full px-2 py-4 m-4 flex-grow">
                 <h3 className="text-lg font-bold text-[#1F1F1F] mb-3">
                   Key Features
                 </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       12 modules (self-paced, 12 weeks)
@@ -51,7 +59,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Live sessions (2× weekly)
@@ -59,7 +67,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Resources & templates
@@ -67,7 +75,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pb-1 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Student forum access
@@ -75,7 +83,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pb-1 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Practice quizzes
@@ -84,26 +92,54 @@ export default function PricingPage() {
                 </ul>
               </div>
 
-                <button
+              <motion.button
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-[5px] transition-colors text-sm">
+                className="w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-16 rounded-[5px] transition-colors text-lg absolute bottom-20"
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 Get Started
-                </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Premium Plan */}
-            <div className="relative bg-gradient-to-br from-[#E8D5F2] to-[#D4B8E8] p-6 shadow-sm">
+            <motion.div 
+              className="relative flex flex-col h-[691px] w-[400px] items-center py-4 px-2 shadow-sm"
+              style={{
+                background: 'linear-gradient(20deg, rgba(159, 63, 159, 0.8), rgba(251, 239, 255, 0.9) 28%, rgba(251, 239, 255, 1) 68%, rgba(159, 63, 159, 0.8))'
+              }}
+              whileHover={shouldReduceMotion ? {} : { 
+                y: -12,
+                boxShadow: "0 15px 50px rgba(128, 0, 128, 0.25)"
+              }}
+              transition={{ duration: 0.3, ease: easeOut }}
+            >
+              {/* Star Icons Placeholders */}
+              <div className="absolute w-9 h-9 top-6 left-8">
+                <Star1 />
+              </div>
+              <div className="absolute top-14 right-18">
+                <Star2 />
+              </div>
+              <div className="absolute bottom-40 left-6">
+                <Star4 />
+              </div>
+              <div className="absolute top-53 right-10">
+                <Star3 />
+              </div>
+
               {/* Recommended Badge */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <div className="bg-[#800080] text-white px-4 py-1 rounded-full text-xs font-bold">
+              <div className="absolute -top-3 left-1/3 -translate-x-1/2">
+                <div className="bg-[#800080] text-white px-4 py-1 rounded-full text-xs font-bold uppercase">
                   RECOMMENDED
                 </div>
               </div>
 
-              <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-[#1F1F1F] mb-1">
+                <h2 className="text-2xl font-bold text-[#1F1F1F] mb-1 self-start pl-4 pt-6">
                   Premium
                 </h2>
+              <div className="flex flex-col items-center m-4 px-2 py-4">
                 <div className="flex items-center justify-center gap-2 mb-1">
                   <span className="text-sm text-gray-600 line-through">
                     ₦100,000
@@ -113,23 +149,23 @@ export default function PricingPage() {
                   ₦90,000
                 </div>
                 <div 
-  className="inline-block px-3 py-1 text-sm font-bold text-black rounded-full" 
-  style={{ 
-    background: 'linear-gradient(45deg, #EFB832 20%, #FEF092 50%, #EFB832 80%)' 
-  }}
->
-  Save ₦10,000
-</div>
+                  className="inline-block px-3 py-1 text-sm font-bold text-black rounded-full" 
+                  style={{ 
+                    background: 'linear-gradient(45deg, #EFB832 20%, #FEF092 50%, #EFB832 80%)' 
+                  }}
+                >
+                  Save ₦10,000
+                </div>
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col items-start w-full px-2 py-4 m-4 flex-grow">
                 <h3 className="text-lg font-bold text-[#1F1F1F] mb-3">
                   Everything in Basic plus...
                 </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Priority support
@@ -137,7 +173,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Graded assessments + final exam
@@ -145,15 +181,15 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pl-1 text-[#800080]" />
                     </div>
-                    <span className="text-sm text-gray-900 leading-relaxed">
+                    <span className="text-sm text-gray-900 leading-relaxed w-full">
                       Professional Diploma certificate (upon meeting criteria)
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="flex-shrink-0 flex items-center justify-center mt-0.5">
-                      <Check className="h-6 w-6 pt-1 text-[#800080]" />
+                      <Check className="h-6 w-6 pb-1 pl-1 text-[#800080]" />
                     </div>
                     <span className="text-sm text-gray-900 leading-relaxed">
                       Official transcript
@@ -162,12 +198,16 @@ export default function PricingPage() {
                 </ul>
               </div>
 
-              <button 
+              <motion.button 
                 onClick={() => window.location.href = '/auth/register'}
-                className="w-full bg-[#800080] hover:bg-[#690069] text-white font-semibold py-3 rounded-[5px] transition-colors text-sm">
+                className="w-[280px] bg-[#800080] hover:bg-[#690069] text-white font-bold py-4 px-16 rounded-[5px] transition-colors text-lg absolute bottom-20"
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 Get Started
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
 
           <p className="text-center text-gray-800 mt-6 text-sm">
