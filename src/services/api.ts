@@ -266,30 +266,45 @@ const handleAuthFailure = async () => {
 export const authApi = {
   // Register new user
   register: async (data: RegistrationData): Promise<UserProfile> => {
-    const response = await api.post("/auth/registration/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/registration/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Registration failed:", error);
+      throw error;
+    }
   },
 
   // Login user (regular login)
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
-    const response = await api.post("/auth/login/", credentials);
+    try {
+      const response = await api.post("/auth/login/", credentials);
 
-    if (response.data.access && response.data.refresh) {
-      await saveTokens(response.data.access, response.data.refresh);
+      if (response.data.access && response.data.refresh) {
+        await saveTokens(response.data.access, response.data.refresh);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Login failed:", error);
+      throw error;
     }
-
-    return response.data;
   },
 
   // Admin login (NEW - separate endpoint)
   adminLogin: async (credentials: LoginCredentials): Promise<LoginResponse> => {
-    const response = await api.post("/admin-login/", credentials);
+    try {
+      const response = await api.post("/admin-login/", credentials);
 
-    if (response.data.access && response.data.refresh) {
-      await saveTokens(response.data.access, response.data.refresh);
+      if (response.data.access && response.data.refresh) {
+        await saveTokens(response.data.access, response.data.refresh);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Admin login failed:", error);
+      throw error;
     }
-
-    return response.data;
   },
 
   // Logout user
@@ -307,75 +322,125 @@ export const authApi = {
   verifyEmail: async (
     data: EmailVerificationData
   ): Promise<{ detail: string }> => {
-    const response = await api.post("/auth/registration/verify-email/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/registration/verify-email/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Email verification failed:", error);
+      throw error;
+    }
   },
 
   // Resend verification email
   resendVerificationEmail: async (
     data: ResendEmailData
   ): Promise<{ detail: string }> => {
-    const response = await api.post("/auth/registration/resend-email/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/registration/resend-email/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Resend verification email failed:", error);
+      throw error;
+    }
   },
 
   // Change password
   changePassword: async (
     data: PasswordChangeData
   ): Promise<{ detail: string }> => {
-    const response = await api.post("/auth/password/change/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/password/change/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Change password failed:", error);
+      throw error;
+    }
   },
 
   // Reset password
   resetPassword: async (
     data: PasswordResetData
   ): Promise<{ detail: string }> => {
-    const response = await api.post("/auth/password/reset/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/password/reset/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Reset password failed:", error);
+      throw error;
+    }
   },
 
   // Confirm password reset
   confirmPasswordReset: async (
     data: PasswordResetConfirmData
   ): Promise<{ detail: string }> => {
-    const response = await api.post("/auth/password/reset/confirm/", data);
-    return response.data;
+    try {
+      const response = await api.post("/auth/password/reset/confirm/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Confirm password reset failed:", error);
+      throw error;
+    }
   },
 
   // Get current user
   getUser: async (): Promise<UserProfile> => {
-    const response = await api.get("/auth/user/");
-    return response.data;
+    try {
+      const response = await api.get("/auth/user/");
+      return response.data;
+    } catch (error) {
+      console.error("Get user failed:", error);
+      throw error;
+    }
   },
 
   // Update current user (full update)
   updateUser: async (data: Partial<UserProfile>): Promise<UserProfile> => {
-    const response = await api.put("/auth/user/", data);
-    return response.data;
+    try {
+      const response = await api.put("/auth/user/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Update user failed:", error);
+      throw error;
+    }
   },
 
   // Update current user (partial update)
   patchUser: async (data: Partial<UserProfile>): Promise<UserProfile> => {
-    const response = await api.patch("/auth/user/", data);
-    return response.data;
+    try {
+      const response = await api.patch("/auth/user/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Patch user failed:", error);
+      throw error;
+    }
   },
 
   // Google OAuth login
   googleLogin: async (data: GoogleAuthData): Promise<LoginResponse> => {
-    const response = await api.post("/auth/google/", data);
+    try {
+      const response = await api.post("/auth/google/", data);
 
-    if (response.data.access && response.data.refresh) {
-      await saveTokens(response.data.access, response.data.refresh);
+      if (response.data.access && response.data.refresh) {
+        await saveTokens(response.data.access, response.data.refresh);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Google login failed:", error);
+      throw error;
     }
-
-    return response.data;
   },
 
   // Verify current token
   verifyToken: async (): Promise<{ user: UserProfile }> => {
-    const response = await api.post("/auth/token/verify/");
-    return response.data;
+    try {
+      const response = await api.post("/auth/token/verify/");
+      return response.data;
+    } catch (error) {
+      console.error("Verify token failed:", error);
+      throw error;
+    }
   },
 };
 
@@ -383,14 +448,24 @@ export const authApi = {
 export const userApi = {
   // Get all users
   getUsers: async (): Promise<UserData[]> => {
-    const response = await api.get("/account/users/");
-    return response.data;
+    try {
+      const response = await api.get("/account/users/");
+      return response.data;
+    } catch (error) {
+      console.error("Get users failed:", error);
+      throw error;
+    }
   },
 
   // Get user by ID
   getUser: async (id: number): Promise<UserData> => {
-    const response = await api.get(`/account/users/${id}/`);
-    return response.data;
+    try {
+      const response = await api.get(`/account/users/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.error("Get user failed:", error);
+      throw error;
+    }
   },
 
   // Update user by ID (full update)
@@ -398,19 +473,34 @@ export const userApi = {
     id: number,
     data: Partial<UserData>
   ): Promise<UserData> => {
-    const response = await api.put(`/account/users/${id}/`, data);
-    return response.data;
+    try {
+      const response = await api.put(`/account/users/${id}/`, data);
+      return response.data;
+    } catch (error) {
+      console.error("Update user failed:", error);
+      throw error;
+    }
   },
 
   // Update user by ID (partial update)
   patchUser: async (id: number, data: Partial<UserData>): Promise<UserData> => {
-    const response = await api.patch(`/account/users/${id}/`, data);
-    return response.data;
+    try {
+      const response = await api.patch(`/account/users/${id}/`, data);
+      return response.data;
+    } catch (error) {
+      console.error("Patch user failed:", error);
+      throw error;
+    }
   },
 
   // Delete user by ID
   deleteUser: async (id: number): Promise<void> => {
-    await api.delete(`/account/users/${id}/`);
+    try {
+      await api.delete(`/account/users/${id}/`);
+    } catch (error) {
+      console.error("Delete user failed:", error);
+      throw error;
+    }
   },
 };
 
