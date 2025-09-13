@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAuth, withAdminAuth } from "@/contexts/AuthContext";
+import { useAuth, withStudentAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,27 +24,27 @@ import Image from "next/image";
 const navigationItems = [
   {
     name: "Dashboard",
-    href: "/admin/dashboard",
+    href: "/student/dashboard",
     icon: LayoutDashboard,
   },
   {
     name: "My Classroom",
-    href: "/admin/classroom",
+    href: "/student/classroom",
     icon: BookOpen,
   },
   {
     name: "Live Sessions",
-    href: "/admin/sessions",
+    href: "/student/sessions",
     icon: Video,
   },
   {
     name: "Student's Forum",
-    href: "/admin/forum",
+    href: "/student/forum",
     icon: MessageSquare,
   },
   {
     name: "Resources",
-    href: "/admin/resources",
+    href: "/student/resources",
     icon: FolderOpen,
   },
 ]
@@ -52,16 +52,16 @@ const navigationItems = [
 const bottomItems = [
   {
     name: "Settings",
-    href: "/admin/settings",
+    href: "/student/settings",
     icon: Settings,
   },
 ]
 
-interface AdminLayoutProps {
+interface StudentLayoutProps {
   children: React.ReactNode
 }
 
-function AdminLayoutComponent({ children }: AdminLayoutProps) {
+function StudentLayoutComponent({ children }: StudentLayoutProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -130,17 +130,17 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         )}
       >
         {/* Mobile Header */}
-        <div className="p-3 border-b border-gray-200 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-              <Image
-                src="/iconn.png"
-                width={56}
-                height={56}
-                alt="DRID logo"
-                className="h-8 w-10"
-              />
-              <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-3 tracking-wide">DRID</span>
-            </div>
+        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+                        <Image
+                          src="/iconn.png"
+                          width={56}
+                          height={56}
+                          alt="DRID logo"
+                          className="h-8 w-10"
+                        />
+                        <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-4 tracking-wide">DRID</span>
+                      </div>
           <Button 
             variant="ghost" 
             size="sm" 
@@ -153,7 +153,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
 
         {/* Mobile User Info */}
         {user && (
-          <div className="p-3 border-b border-gray-200">
+          <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
                 <span className="text-[#800080] font-semibold text-xs">
@@ -168,7 +168,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   }
                 </p>
                 <p className="text-xs text-gray-500 truncate">
-                  Admin
+                  Student
                 </p>
               </div>
             </div>
@@ -176,10 +176,10 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         )}
 
         {/* Mobile Navigation */}
-        <div className="flex-1 flex flex-col justify-between p-3">
+        <div className="flex-1 flex flex-col justify-between p-4">
           <nav className="space-y-2">
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = item.name === 'My Classroom' ? pathname.startsWith(item.href) : pathname === item.href;
               return (
                 <Link
                   key={item.name}
@@ -239,18 +239,18 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         )}
       >
         {/* Desktop Header with Logo and Toggle */}
-        <div className="p-3 border-b border-gray-200 flex items-center justify-between">
+        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
           {!isCollapsed && (
-            <div className="flex items-center gap-3">
-              <Image
-                src="/iconn.png"
-                width={56}
-                height={56}
-                alt="DRID logo"
-                className="h-8 w-10"
-              />
-              <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-3 tracking-wide">DRID</span>
-            </div>
+            <div className="flex items-center gap-4">
+                          <Image
+                            src="/iconn.png"
+                            width={56}
+                            height={56}
+                            alt="DRID logo"
+                            className="h-8 w-10"
+                          />
+                          <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-4 tracking-wide">DRID</span>
+                        </div>
           )}
           <Button variant="ghost" size="sm" onClick={() => setIsCollapsed(!isCollapsed)} className="p-1 h-8 w-8">
             {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
@@ -259,7 +259,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
 
         {/* Desktop User Info */}
         {!isCollapsed && user && (
-          <div className="p-3 border-b border-gray-200">
+          <div className="p-4 border-b border-gray-200">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
                 <span className="text-[#800080] font-semibold text-xs">
@@ -274,7 +274,7 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
                   }
                 </p>
                 <p className="text-xs text-gray-500 truncate">
-                  Admin
+                  Student
                 </p>
               </div>
             </div>
@@ -282,10 +282,10 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
         )}
 
         {/* Desktop Navigation */}
-        <div className="flex-1 flex flex-col justify-between p-3">
+        <div className="flex-1 flex flex-col justify-between p-4">
           <nav className="space-y-2">
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = item.name === 'My Classroom' ? pathname.startsWith(item.href) : pathname === item.href;
               return (
                 <Link
                   key={item.name}
@@ -356,16 +356,16 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div className="flex items-center gap-3">
-              <Image
-                src="/iconn.png"
-                width={56}
-                height={56}
-                alt="DRID logo"
-                className="h-8 w-10"
-              />
-              <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-3 tracking-wide">DRID</span>
-            </div>
+          <div className="flex items-center gap-4">
+                        <Image
+                          src="/iconn.png"
+                          width={56}
+                          height={56}
+                          alt="DRID logo"
+                          className="h-8 w-10"
+                        />
+                        <span className="text-lg text-[#800080] md:text-2xl font-extrabold pt-4 tracking-wide">DRID</span>
+                      </div>
           <div className="w-10 h-8 flex items-center justify-end">
             {user && (
               <div className="w-8 h-8 bg-[#F9DBFF3D] rounded-full flex items-center justify-center">
@@ -384,5 +384,5 @@ function AdminLayoutComponent({ children }: AdminLayoutProps) {
   )
 }
 
-// Wrap with admin authentication HOC
-export const AdminLayout = withAdminAuth(AdminLayoutComponent)
+// Wrap with student authentication HOC
+export const StudentLayout = withStudentAuth(StudentLayoutComponent)
