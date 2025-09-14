@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronDown, ChevronUp, LockKeyhole, TvMinimalPlay, Menu } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Toaster, toast } from 'sonner';
+import ClassroomTabs from '@/components/student/ClassroomTabs';
 
 function ClassroomLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -28,16 +29,7 @@ function ClassroomLayoutContent({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleTabClick = (href: string) => {
-    localStorage.setItem('lastClassroomTab', href);
-  };
-
-  const tabs = [
-    { id: 'overview', label: 'Overview', href: '/student/classroom/overview' },
-    { id: 'notes', label: 'Notes', href: '/student/classroom/notes' },
-    { id: 'resources', label: 'Resources', href: '/student/classroom/resources' },
-    { id: 'quiz', label: 'Quiz', href: '/student/classroom/quiz' },
-  ];
+  
 
   const modules = [
     {
@@ -363,24 +355,7 @@ function ClassroomLayoutContent({ children }: { children: React.ReactNode }) {
 
         {!isQuizPage && (
           <div className="px-6 flex-shrink-0">
-            <div className="border-b-2 border-gray-200">
-              <nav className="flex space-x-12">
-                {tabs.map((tab) => (
-                  <Link
-                    key={tab.id}
-                    href={tab.href}
-                    onClick={() => handleTabClick(tab.href)}
-                    className={`pt-5 pb-0.5 px-1 border-b-2 font-medium text-sm relative ${
-                      pathname === tab.href
-                        ? 'border-[#800080] text-[#800080] -mb-px z-10'
-                        : 'border-transparent text-[#1E1E1E] hover:text-gray-700 hover:border-gray-300 hover:-mb-px'
-                    }`}
-                  >
-                    {tab.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+            <ClassroomTabs />
           </div>
         )}
 

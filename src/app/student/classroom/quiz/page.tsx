@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import ClassroomTabs from '@/components/student/ClassroomTabs';
 
 interface QuizQuestion {
   id: number;
@@ -130,7 +131,7 @@ export default function QuizPage() {
             className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
           >
             <ArrowLeft size={20} />
-            <span>Quizzes</span>
+            <span>Back to Module</span>
           </button>
         </div>
 
@@ -241,20 +242,26 @@ export default function QuizPage() {
   return (
     <div className={`h-full flex flex-col ${isMobile ? 'p-4' : ''}`}>
       {/* Back Button */}
-      <div className="mb-6">
+      <div className="mb-0">
         <Link 
           href="/student/classroom"
           onClick={() => localStorage.removeItem('lastClassroomTab')}
           className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
         >
           <ArrowLeft size={20} />
-          <span>Quizzes</span>
+          <span>Back to Module</span>
         </Link>
       </div>
 
+      {!isMobile && (
+        <div className="mb-6">
+          <ClassroomTabs />
+        </div>
+      )}
+
       {/* Quiz Content */}
       <div className="flex-1 flex flex-col">
-        <div className="flex-1">
+        <div>
           <div className={isMobile ? '' : 'max-w-3xl'}>
             <h1 className={`font-semibold text-gray-900 mb-6 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
               {questions[currentQuestion].question}
