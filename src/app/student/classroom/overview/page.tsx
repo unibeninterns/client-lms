@@ -1,13 +1,22 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import Image from 'next/image';
+import { ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function OverviewPage() {
   const [showMore, setShowMore] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -17,6 +26,14 @@ export default function OverviewPage() {
 
   return (
     <div className="h-full flex flex-col">
+        {isMobile && (
+            <div className="p-4 bg-white border-b border-gray-200">
+                <Link href="/student/classroom" onClick={() => localStorage.removeItem('lastClassroomTab')} className="flex items-center space-x-2 text-gray-600 mb-4">
+                    <ArrowLeft size={20} />
+                    <span>More</span>
+                </Link>
+            </div>
+        )}
       {/* Content */}
       <div className="flex-1 max-w-4xl">
         <div className="space-y-6">
@@ -83,7 +100,7 @@ export default function OverviewPage() {
                 <p className="text-sm text-gray-600 mb-4">
                   Get DRID certificate by completing entire course
                 </p>
-                <button className="px-8 py-3 border-2 border-[#800080] text-[#800080] rounded text-sm font-medium">
+                <button className="px-8 py-3 border-2 border-gray-300 text-gray-400 rounded text-sm font-medium cursor-not-allowed opacity-60">
                   DRID Certificate
                 </button>
               </div>

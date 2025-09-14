@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
@@ -15,6 +15,17 @@ export default function QuizPage() {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const questions: QuizQuestion[] = [
     {
@@ -111,7 +122,7 @@ export default function QuizPage() {
 
   if (showReview) {
     return (
-      <div className="h-full flex flex-col">
+      <div className={`h-full flex flex-col ${isMobile ? 'p-4' : ''}`}>
         {/* Back Button */}
         <div className="mb-6">
           <button 
@@ -119,24 +130,22 @@ export default function QuizPage() {
             className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
           >
             <ArrowLeft size={20} />
-            <span>Back to Module</span>
+            <span>Quizzes</span>
           </button>
         </div>
 
-
-
         {/* Review Content */}
         <div className="flex-1 space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-900">Quiz Review</h2>
+          <h2 className={`font-semibold text-gray-900 ${isMobile ? 'text-xl' : 'text-2xl'}`}>Quiz Review</h2>
           
           {questions.map((question, index) => (
-            <div key={question.id} className="border border-gray-200 rounded-lg p-6">
-              <h3 className="font-medium text-gray-900 mb-4">{question.question}</h3>
+            <div key={question.id} className="border border-gray-200 rounded-lg p-4 lg:p-6">
+              <h3 className={`font-medium text-gray-900 mb-4 ${isMobile ? 'text-sm' : ''}`}>{question.question}</h3>
               <div className="space-y-2">
                 {question.options.map((option, optionIndex) => (
                   <div 
                     key={optionIndex}
-                    className={`flex items-center p-3 rounded ${
+                    className={`flex items-center p-3 rounded text-sm ${
                       optionIndex === question.correctAnswer
                         ? 'bg-green-50 border border-green-200'
                         : selectedAnswers[index] === optionIndex && optionIndex !== question.correctAnswer
@@ -151,7 +160,7 @@ export default function QuizPage() {
                         ? 'border-red-500 bg-red-500'
                         : 'border-gray-300'
                     }`}></div>
-                    <label className="text-gray-700">{option}</label>
+                    <label className="text-gray-700 flex-1">{option}</label>
                     {optionIndex === question.correctAnswer && (
                       <span className="ml-auto text-green-600 text-sm font-medium">Correct</span>
                     )}
@@ -170,11 +179,12 @@ export default function QuizPage() {
 
   if (isCompleted) {
     return (
-      <div className="h-full flex flex-col">
+      <div className={`h-full flex flex-col ${isMobile ? 'p-4' : ''}`}>
         {/* Back Button */}
         <div className="mb-6">
           <Link 
-            href="/student/classroom/overview"
+            href="/student/classroom"
+            onClick={() => localStorage.removeItem('lastClassroomTab')}
             className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
           >
             <ArrowLeft size={20} />
@@ -182,47 +192,46 @@ export default function QuizPage() {
           </Link>
         </div>
 
-
-
         {/* Completion Screen */}
-        <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8">
+        <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6 lg:space-y-8">
           {/* Trophy Icon */}
-          <div className="w-32 h-32 relative">
+          <div className={`relative ${isMobile ? 'w-20 h-20' : 'w-32 h-32'}`}>
             <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
-              <div className="text-6xl">🏆</div>
+              <div className={isMobile ? 'text-4xl' : 'text-6xl'}>🏆</div>
             </div>
             {/* Confetti elements */}
-            <div className="absolute -top-4 -left-4 text-green-500 text-2xl animate-bounce">🎉</div>
-            <div className="absolute -top-4 -right-4 text-pink-500 text-2xl animate-bounce" style={{animationDelay: '0.2s'}}>🎊</div>
-            <div className="absolute -bottom-4 -left-4 text-blue-500 text-2xl animate-bounce" style={{animationDelay: '0.4s'}}>✨</div>
-            <div className="absolute -bottom-4 -right-4 text-purple-500 text-2xl animate-bounce" style={{animationDelay: '0.6s'}}>🎈</div>
+            <div className={`absolute -top-2 -left-2 text-green-500 animate-bounce ${isMobile ? 'text-lg' : 'text-2xl'}`}>🎉</div>
+            <div className={`absolute -top-2 -right-2 text-pink-500 animate-bounce ${isMobile ? 'text-lg' : 'text-2xl'}`} style={{animationDelay: '0.2s'}}>🎊</div>
+            <div className={`absolute -bottom-2 -left-2 text-blue-500 animate-bounce ${isMobile ? 'text-lg' : 'text-2xl'}`} style={{animationDelay: '0.4s'}}>✨</div>
+            <div className={`absolute -bottom-2 -right-2 text-purple-500 animate-bounce ${isMobile ? 'text-lg' : 'text-2xl'}`} style={{animationDelay: '0.6s'}}>🎈</div>
           </div>
 
           <div>
-            <h1 className="text-4xl font-semibold text-gray-900 mb-2">
+            <h1 className={`font-semibold text-gray-900 mb-2 ${isMobile ? 'text-2xl' : 'text-4xl'}`}>
               Congratulations! You passed the quiz!
             </h1>
-            <p className="text-xl text-gray-600">Your Score: {score}/{questions.length}</p>
+            <p className={`text-gray-600 ${isMobile ? 'text-lg' : 'text-xl'}`}>Your Score: {score}/{questions.length}</p>
           </div>
 
-          <div className="flex flex-col space-y-4">
-            <button className="px-12 py-3 bg-[#800080] text-white rounded-lg font-medium text-lg hover:bg-[#660066]">
+          <div className="flex flex-col space-y-4 w-full max-w-sm">
+            <button className={`px-8 py-3 bg-[#800080] text-white rounded-lg font-medium hover:bg-[#660066] ${isMobile ? 'text-base' : 'text-lg'}`}>
               Go to Next Module
             </button>
             <button 
               onClick={() => setShowReview(true)}
-              className="px-12 py-3 border-2 border-[#800080] text-[#800080] rounded-lg font-medium text-lg hover:bg-[#FBF2FF]"
+              className={`px-8 py-3 border-2 border-[#800080] text-[#800080] rounded-lg font-medium hover:bg-[#FBF2FF] ${isMobile ? 'text-base' : 'text-lg'}`}
             >
               Review Answers
             </button>
           </div>
 
           <Link 
-            href="/student/classroom/overview"
-            className="flex items-center space-x-2 text-[#800080] hover:text-[#660066] mt-8"
+            href="/student/classroom"
+            onClick={() => localStorage.removeItem('lastClassroomTab')}
+            className={`flex items-center space-x-2 text-[#800080] hover:text-[#660066] mt-6 ${isMobile ? 'text-base' : 'text-lg'}`}
           >
             <ArrowLeft size={20} />
-            <span className="text-lg">Back to module</span>
+            <span>Back to module</span>
           </Link>
         </div>
       </div>
@@ -230,32 +239,24 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="h-full flex flex-col">
+    <div className={`h-full flex flex-col ${isMobile ? 'p-4' : ''}`}>
       {/* Back Button */}
       <div className="mb-6">
         <Link 
-          href="/student/classroom/overview"
+          href="/student/classroom"
+          onClick={() => localStorage.removeItem('lastClassroomTab')}
           className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
         >
           <ArrowLeft size={20} />
-          <span>Back to Module</span>
+          <span>Quizzes</span>
         </Link>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="flex space-x-12">
-          <span className="px-1 border-b-2 border-[#800080] text-[#800080] font-medium text-sm">
-            Quiz
-          </span>
-        </nav>
       </div>
 
       {/* Quiz Content */}
       <div className="flex-1 flex flex-col">
         <div className="flex-1">
-          <div className="max-w-3xl">
-            <h1 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className={isMobile ? '' : 'max-w-3xl'}>
+            <h1 className={`font-semibold text-gray-900 mb-6 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
               {questions[currentQuestion].question}
             </h1>
 
@@ -273,7 +274,7 @@ export default function QuizPage() {
                   />
                   <label 
                     htmlFor={`option-${index}`}
-                    className="ml-3 text-gray-700 text-lg cursor-pointer"
+                    className={`ml-3 text-gray-700 cursor-pointer ${isMobile ? 'text-base' : 'text-lg'}`}
                   >
                     {option}
                   </label>
@@ -284,9 +285,9 @@ export default function QuizPage() {
         </div>
 
         {/* Navigation */}
-        <div className="border-t border-[#800080] pt-4 mt-8">
+        <div className={`border-t border-[#800080] pt-4 mt-8 ${isMobile ? 'mt-6' : ''}`}>
           <div className="flex justify-between items-center">
-            <p className="font-medium text-gray-700">
+            <p className="font-medium text-gray-700 text-sm">
               Question {currentQuestion + 1} of {questions.length}
             </p>
             
@@ -294,7 +295,7 @@ export default function QuizPage() {
               {currentQuestion > 0 && (
                 <button
                   onClick={handleBack}
-                  className="px-6 py-2 border-2 border-[#800080] text-[#800080] rounded font-medium hover:bg-[#FBF2FF]"
+                  className={`px-4 py-2 border-2 border-[#800080] text-[#800080] rounded font-medium hover:bg-[#FBF2FF] ${isMobile ? 'text-sm' : ''}`}
                 >
                   Back
                 </button>
@@ -303,14 +304,14 @@ export default function QuizPage() {
               {currentQuestion === questions.length - 1 ? (
                 <button
                   onClick={handleSubmit}
-                  className="px-6 py-2 bg-[#800080] text-white rounded font-medium hover:bg-[#660066]"
+                  className={`px-4 py-2 bg-[#800080] text-white rounded font-medium hover:bg-[#660066] ${isMobile ? 'text-sm' : ''}`}
                 >
-                  Submit
+                  Next
                 </button>
               ) : (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-2 bg-[#800080] text-white rounded font-medium hover:bg-[#660066]"
+                  className={`px-4 py-2 bg-[#800080] text-white rounded font-medium hover:bg-[#660066] ${isMobile ? 'text-sm' : ''}`}
                 >
                   Next
                 </button>

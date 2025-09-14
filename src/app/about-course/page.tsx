@@ -326,8 +326,8 @@ export default function AboutCoursePage() {
             </div>
 
             {/* FAQ */}
-            <div id="faq" className="rounded-2xl ring-1 ring-fuchsia-200 shadow-lg p-8">
-              <h3 className="text-lg sm:text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Frequently Asked Questions</h3>
+            <div id="faq" className="rounded-2xl ring-1 ring-fuchsia-200 shadow-lg py-8 px-4 md:p-8">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1F1F1F] mb-8">Frequently Asked Questions</h3>
               <FAQSection />
             </div>
           </div>

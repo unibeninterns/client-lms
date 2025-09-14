@@ -38,7 +38,7 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
                   src="/logo-header.png"
                   width={250}
                   height={98}
-                  className="w-44 md:w-64"
+                  className="w-44 md:w-64 pb-4"
                   alt="Logo : DEPARTMENT OF RESEARCH, INNOVATION AND RESEARCH"
                 />
                 <h1 id="hero-title" className="font-serif text-4xl sm:text-4xl md:text-5xl font-semibold leading-tight">
